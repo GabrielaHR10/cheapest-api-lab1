@@ -14,4 +14,3 @@ export class QueryTiendaDto {
   @IsEnum(EstadoCaptacion)
   estadoCaptacion?: EstadoCaptacion;
 }
-

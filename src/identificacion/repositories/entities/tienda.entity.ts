@@ -16,30 +16,27 @@ export enum EstadoCaptacion {
   HABILITADO_AVANZADO = 'habilitadoAvanzado',
 }
 
-
-
 @Entity('tiendas')
 export class Tienda {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @Column('varchar', { length: 100 })
+  codigoInterno: string;
 
-    @Column('varchar', { length: 100 })
-    codigoInterno: string;
+  @Column('varchar', { length: 255 })
+  nombreComercial: string;
 
-    @Column('varchar', { length: 255 })
-    nombreComercial: string;
+  @Column('varchar', { length: 100 })
+  rut: string;
 
-    @Column('varchar', { length: 100 })
-    rut: string;
+  @Column('varchar', { length: 255 })
+  direccion: string;
 
-    @Column('varchar', { length: 255 })
-    direccion: string;
+  @Column('varchar', { length: 50 })
+  telefono: string;
 
-    @Column('varchar', { length: 50 })
-    telefono: string;
-
-    @Column({
+  @Column({
     type: 'enum',
     enum: EstadoCaptacion,
     default: EstadoCaptacion.PROSPECTO_CREADO,
@@ -57,10 +54,4 @@ export class Tienda {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-
-
-
-
-
 }

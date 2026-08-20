@@ -23,11 +23,9 @@ import { TiendaController } from './controllers';
     TiendaRepository,
     // Services
     TiendaService,
-
-    //Están en el arreglo providers porque providers es el lugar donde registras 
-    //todas las clases que NestJS debe instanciar, administrar e inyectar mediante su sistema de Inyección de Dependencias (
+    // Van en providers porque es donde se registran las clases que Nest debe
+    // instanciar, administrar e inyectar a traves de su contenedor de DI.
   ],
   exports: [TiendaService],
 })
-
 export class IdentificacionModule {}

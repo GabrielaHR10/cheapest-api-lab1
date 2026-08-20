@@ -1,4 +1,3 @@
-
 import {
   IsEnum,
   IsOptional,
@@ -7,7 +6,6 @@ import {
   MaxLength,
 } from 'class-validator';
 import { EstadoCaptacion } from '../../repositories/entities';
-
 
 export class UpdateTiendaDto {
   @IsOptional()
@@ -46,5 +44,4 @@ export class UpdateTiendaDto {
   @IsOptional()
   @IsUUID()
   paisId?: string | null;
-
 }

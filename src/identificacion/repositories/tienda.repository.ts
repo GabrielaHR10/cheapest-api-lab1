@@ -1,4 +1,3 @@
-
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { QueryTiendaDto } from '../dtos';
@@ -12,12 +11,12 @@ export class TiendaRepository {
     @Inject('TIENDA_REPOSITORY')
     private repository: Repository<Tienda>,
   ) {}
-//En TypeScript, se pone Promise<...> en el tipo de retorno de una función para indicar que es asíncrona y que devolverá un valor 
-// en el futuro, cuando termine la operación.
+  //En TypeScript, se pone Promise<...> en el tipo de retorno de una función para indicar que es asíncrona y que devolverá un valor
+  // en el futuro, cuando termine la operación.
 
-//Por qué usa Partial<Tienda>: Cuando vas a registrar una tienda nueva, solo envías los datos básicos (como el nombre o la dirección). 
-// Aún no tienes campos como el id, la fecha de creación (createdAt), o los valores por defecto que asigna la base de datos. Si no usaras 
-// Partial, TypeScript te marcaría un error exigiéndote enviar un id que todavía no existe.
+  //Por qué usa Partial<Tienda>: Cuando vas a registrar una tienda nueva, solo envías los datos básicos (como el nombre o la dirección).
+  // Aún no tienes campos como el id, la fecha de creación (createdAt), o los valores por defecto que asigna la base de datos. Si no usaras
+  // Partial, TypeScript te marcaría un error exigiéndote enviar un id que todavía no existe.
   async create(tienda: Partial<Tienda>): Promise<Tienda> {
     const newTienda = this.repository.create(tienda);
     return this.repository.save(newTienda);
@@ -25,7 +24,7 @@ export class TiendaRepository {
 
   async findAll(query: QueryTiendaDto): Promise<Tienda[]> {
     const queryBuilder = this.repository.createQueryBuilder('tienda');
-    //es un método de TypeORM que te permite construir consultas SQL 
+    //es un método de TypeORM que te permite construir consultas SQL
     //personalizadas y complejas utilizando código de TypeScript
     if (query.codigoInterno) {
       queryBuilder.andWhere('tienda.codigoInterno = :codigoInterno', {
@@ -46,12 +45,12 @@ export class TiendaRepository {
     }
 
     return queryBuilder.getMany();
-    //getMany() devuelve una lista de tiendas que cumplan la combinación de todos 
+    //getMany() devuelve una lista de tiendas que cumplan la combinación de todos
     // los if en los que entró el programa. Para eso era el andwhere.
   }
 
-//En JavaScript, cuando el nombre de la propiedad y el nombre de la variable son iguales, se puede omitir el valor.
-//  Esa línea es exactamente lo mismo que haber escrito esto de forma extendida: { where: { id: id } }
+  //En JavaScript, cuando el nombre de la propiedad y el nombre de la variable son iguales, se puede omitir el valor.
+  //  Esa línea es exactamente lo mismo que haber escrito esto de forma extendida: { where: { id: id } }
 
   async findById(id: string): Promise<Tienda | null> {
     return this.repository.findOne({ where: { id } });
@@ -70,6 +69,4 @@ export class TiendaRepository {
     const result = await this.repository.delete(id);
     return (result.affected ?? 0) > 0;
   }
-
-
 }
