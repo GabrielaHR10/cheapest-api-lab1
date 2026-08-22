@@ -38,6 +38,12 @@ export class TiendaRepository {
       });
     }
 
+    if (query.responsableId) {
+      queryBuilder.andWhere('tienda.responsableId = :responsableId', {
+        responsableId: query.responsableId,
+      });
+    }
+
     if (query.estadoCaptacion) {
       queryBuilder.andWhere('tienda.estadoCaptacion = :estadoCaptacion', {
         estadoCaptacion: query.estadoCaptacion,

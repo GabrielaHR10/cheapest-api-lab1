@@ -2,9 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { DocumentoTienda } from './documento-tienda.entity';
+import { Usuario } from './usuario.entity';
 
 export enum EstadoCaptacion {
   PROSPECTO_CREADO = 'prospectoCreado',
@@ -27,6 +32,9 @@ export class Tienda {
   @Column('varchar', { length: 255 })
   nombreComercial: string;
 
+  @Column('uuid')
+  responsableId: string;
+
   @Column('varchar', { length: 100 })
   rut: string;
 
@@ -43,15 +51,16 @@ export class Tienda {
   })
   estadoCaptacion: EstadoCaptacion;
 
-  @Column('uuid', { nullable: true })
-  responsableId: string | null;
-
-  @Column('uuid', { nullable: true })
-  paisId: string | null;
-
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.tiendas)
+  @JoinColumn({ name: 'responsableId' })
+  responsable: Usuario;
+
+  @OneToMany(() => DocumentoTienda, (documento) => documento.tienda)
+  documentos: DocumentoTienda[];
 }

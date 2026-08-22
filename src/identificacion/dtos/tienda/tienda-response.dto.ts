@@ -4,12 +4,11 @@ export class TiendaResponseDto {
   id: string;
   codigoInterno: string;
   nombreComercial: string;
+  responsableId: string;
   rut: string;
   direccion: string;
   telefono: string;
   estadoCaptacion: EstadoCaptacion;
-  responsableId: string | null;
-  paisId: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

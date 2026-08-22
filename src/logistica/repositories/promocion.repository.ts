@@ -16,7 +16,7 @@ export class PromocionRepository {
     );
     const newPromocion = this.repository.create({
       ...promocion,
-      tiendas: tiendaIds.map((tiendaId) => ({ tiendaId } as PromocionTienda)),
+      tiendas: tiendaIds.map((tiendaId) => ({ tiendaId }) as PromocionTienda),
     });
     return this.repository.save(newPromocion);
   }

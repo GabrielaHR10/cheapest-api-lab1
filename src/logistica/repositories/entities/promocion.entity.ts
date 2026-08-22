@@ -47,9 +47,13 @@ export class Promocion {
   @JoinColumn({ name: 'productoId' })
   producto: Producto;
 
-  @OneToMany(() => PromocionTienda, (promocionTienda) => promocionTienda.promocion, {
-    cascade: true,
-    eager: true,
-  })
+  @OneToMany(
+    () => PromocionTienda,
+    (promocionTienda) => promocionTienda.promocion,
+    {
+      cascade: true,
+      eager: true,
+    },
+  )
   tiendas: PromocionTienda[];
 }

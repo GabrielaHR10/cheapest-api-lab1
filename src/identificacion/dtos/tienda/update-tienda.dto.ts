@@ -19,6 +19,10 @@ export class UpdateTiendaDto {
   nombreComercial?: string;
 
   @IsOptional()
+  @IsUUID()
+  responsableId?: string;
+
+  @IsOptional()
   @IsString()
   @MaxLength(100)
   rut?: string;
@@ -36,12 +40,4 @@ export class UpdateTiendaDto {
   @IsOptional()
   @IsEnum(EstadoCaptacion)
   estadoCaptacion?: EstadoCaptacion;
-
-  @IsOptional()
-  @IsUUID()
-  responsableId?: string | null;
-
-  @IsOptional()
-  @IsUUID()
-  paisId?: string | null;
 }

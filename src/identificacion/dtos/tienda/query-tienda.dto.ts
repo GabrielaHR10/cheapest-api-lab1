@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 import { EstadoCaptacion } from '../../repositories/entities';
 
 export class QueryTiendaDto {
@@ -9,6 +9,10 @@ export class QueryTiendaDto {
   @IsOptional()
   @IsString()
   nombreComercial?: string;
+
+  @IsOptional()
+  @IsUUID()
+  responsableId?: string;
 
   @IsOptional()
   @IsEnum(EstadoCaptacion)

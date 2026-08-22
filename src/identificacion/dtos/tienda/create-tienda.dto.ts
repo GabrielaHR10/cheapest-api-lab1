@@ -16,6 +16,9 @@ export class CreateTiendaDto {
   @MaxLength(255)
   nombreComercial: string;
 
+  @IsUUID()
+  responsableId: string;
+
   @IsString()
   @MaxLength(100)
   rut: string;
@@ -28,15 +31,7 @@ export class CreateTiendaDto {
   @MaxLength(50)
   telefono: string;
 
+  @IsOptional()
   @IsEnum(EstadoCaptacion)
-  @IsOptional()
   estadoCaptacion?: EstadoCaptacion;
-
-  @IsUUID()
-  @IsOptional()
-  responsableId?: string | null;
-
-  @IsUUID()
-  @IsOptional()
-  paisId?: string | null;
 }

@@ -9,12 +9,15 @@ import {
   TiendaResponseDto,
   UpdateTiendaDto,
 } from '../dtos';
-import { TiendaRepository } from '../repositories';
+import { TiendaRepository, UsuarioRepository } from '../repositories';
 import { Tienda } from '../repositories/entities';
 
 @Injectable()
 export class TiendaService {
-  constructor(private readonly tiendaRepository: TiendaRepository) {}
+  constructor(
+    private readonly tiendaRepository: TiendaRepository,
+    private readonly usuarioRepository: UsuarioRepository,
+  ) {}
 
   async create(dto: CreateTiendaDto): Promise<TiendaResponseDto> {
     const existente = await this.tiendaRepository.findByCodigoInterno(
@@ -23,6 +26,16 @@ export class TiendaService {
     if (existente) {
       throw new BadRequestException(
         `Ya existe una tienda con codigoInterno ${dto.codigoInterno}`,
+      );
+    }
+
+    // Validar que el usuario responsable existe
+    const responsable = await this.usuarioRepository.findById(
+      dto.responsableId,
+    );
+    if (!responsable) {
+      throw new BadRequestException(
+        `Usuario con id ${dto.responsableId} no existe`,
       );
     }
 
@@ -47,6 +60,17 @@ export class TiendaService {
     const tienda = await this.tiendaRepository.findById(id);
     if (!tienda) {
       throw new NotFoundException(`Tienda con id ${id} no encontrada`);
+    }
+
+    if (dto.responsableId) {
+      const responsable = await this.usuarioRepository.findById(
+        dto.responsableId,
+      );
+      if (!responsable) {
+        throw new BadRequestException(
+          `Usuario con id ${dto.responsableId} no existe`,
+        );
+      }
     }
 
     const updated = await this.tiendaRepository.update(id, dto);
@@ -76,12 +100,11 @@ export class TiendaService {
       id: tienda.id,
       codigoInterno: tienda.codigoInterno,
       nombreComercial: tienda.nombreComercial,
+      responsableId: tienda.responsableId,
       rut: tienda.rut,
       direccion: tienda.direccion,
       telefono: tienda.telefono,
       estadoCaptacion: tienda.estadoCaptacion,
-      responsableId: tienda.responsableId,
-      paisId: tienda.paisId,
       createdAt: tienda.createdAt,
       updatedAt: tienda.updatedAt,
     };
