@@ -5,6 +5,7 @@ export class TiendaResponseDto {
   codigoInterno: string;
   nombreComercial: string;
   responsableId: string;
+  paisId: string;
   rut: string;
   direccion: string;
   telefono: string;

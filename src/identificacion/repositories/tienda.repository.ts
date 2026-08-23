@@ -44,6 +44,12 @@ export class TiendaRepository {
       });
     }
 
+    if (query.paisId) {
+      queryBuilder.andWhere('tienda.paisId = :paisId', {
+        paisId: query.paisId,
+      });
+    }
+
     if (query.estadoCaptacion) {
       queryBuilder.andWhere('tienda.estadoCaptacion = :estadoCaptacion', {
         estadoCaptacion: query.estadoCaptacion,

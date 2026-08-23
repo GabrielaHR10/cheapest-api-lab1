@@ -1,16 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   CreateUsuarioDto,
   QueryUsuarioDto,
   UpdateUsuarioDto,
   UsuarioResponseDto,
 } from '../dtos';
-import { UsuarioRepository } from '../repositories';
+import { TiendaRepository, UsuarioRepository } from '../repositories';
 import { Usuario } from '../repositories/entities';
 
 @Injectable()
 export class UsuarioService {
-  constructor(private readonly usuarioRepository: UsuarioRepository) {}
+  constructor(
+    private readonly usuarioRepository: UsuarioRepository,
+    private readonly tiendaRepository: TiendaRepository,
+  ) {}
 
   async create(dto: CreateUsuarioDto): Promise<UsuarioResponseDto> {
     const usuario = await this.usuarioRepository.create(dto);
@@ -44,6 +51,15 @@ export class UsuarioService {
     const usuario = await this.usuarioRepository.findById(id);
     if (!usuario) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+
+    // No se usa cascada: borrar un empleado no puede borrar sus tiendas.
+    // Se rechaza el borrado con un error de negocio explicito.
+    const tiendas = await this.tiendaRepository.findAll({ responsableId: id });
+    if (tiendas.length > 0) {
+      throw new BadRequestException(
+        `No se puede eliminar el usuario: es responsable de ${tiendas.length} tienda(s)`,
+      );
     }
 
     await this.usuarioRepository.delete(id);

@@ -1,13 +1,14 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateUsuarioDto, QueryUsuarioDto } from '../dtos';
-import { UsuarioRepository } from '../repositories';
+import { TiendaRepository, UsuarioRepository } from '../repositories';
 import { Perfil } from '../repositories/entities';
 import { UsuarioService } from './usuario.service';
 
 describe('UsuarioService', () => {
   let service: UsuarioService;
   let repository: jest.Mocked<UsuarioRepository>;
+  let tiendaRepository: jest.Mocked<TiendaRepository>;
 
   const dto: CreateUsuarioDto = {
     nombre: 'Ana Torres',
@@ -30,6 +31,9 @@ describe('UsuarioService', () => {
       update: jest.fn(),
       delete: jest.fn(),
     };
+    const mockTiendaRepository = {
+      findAll: jest.fn(),
+    };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -38,11 +42,16 @@ describe('UsuarioService', () => {
           provide: UsuarioRepository,
           useValue: mockRepository,
         },
+        {
+          provide: TiendaRepository,
+          useValue: mockTiendaRepository,
+        },
       ],
     }).compile();
 
     service = module.get<UsuarioService>(UsuarioService);
     repository = module.get(UsuarioRepository);
+    tiendaRepository = module.get(TiendaRepository);
   });
 
   it('should be defined', () => {
@@ -103,13 +112,30 @@ describe('UsuarioService', () => {
   });
 
   describe('delete', () => {
-    it('should delete usuario when it exists', async () => {
+    it('should delete usuario when it exists and has no tiendas', async () => {
       repository.findById.mockResolvedValue(entity as any);
+      tiendaRepository.findAll.mockResolvedValue([]);
       repository.delete.mockResolvedValue(true);
 
       await service.delete('usuario-1');
 
+      expect(tiendaRepository.findAll).toHaveBeenCalledWith({
+        responsableId: 'usuario-1',
+      });
       expect(repository.delete).toHaveBeenCalledWith('usuario-1');
+    });
+
+    it('should throw BadRequestException when usuario is responsable of a tienda', async () => {
+      repository.findById.mockResolvedValue(entity as any);
+      tiendaRepository.findAll.mockResolvedValue([
+        { id: 'tienda-1' },
+        { id: 'tienda-2' },
+      ] as any);
+
+      await expect(service.delete('usuario-1')).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(repository.delete).not.toHaveBeenCalled();
     });
 
     it('should throw NotFoundException when usuario does not exist', async () => {

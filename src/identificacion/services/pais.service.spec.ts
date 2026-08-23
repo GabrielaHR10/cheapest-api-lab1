@@ -1,13 +1,14 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePaisDto, QueryPaisDto } from '../dtos';
-import { PaisRepository } from '../repositories';
+import { PaisRepository, TiendaRepository } from '../repositories';
 import { Moneda } from '../repositories/entities';
 import { PaisService } from './pais.service';
 
 describe('PaisService', () => {
   let service: PaisService;
   let repository: jest.Mocked<PaisRepository>;
+  let tiendaRepository: jest.Mocked<TiendaRepository>;
 
   const dto: CreatePaisDto = {
     nombre: 'Colombia',
@@ -31,6 +32,10 @@ describe('PaisService', () => {
       delete: jest.fn(),
     };
 
+    const mockTiendaRepository = {
+      findAll: jest.fn(),
+    };
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         PaisService,
@@ -38,11 +43,16 @@ describe('PaisService', () => {
           provide: PaisRepository,
           useValue: mockRepository,
         },
+        {
+          provide: TiendaRepository,
+          useValue: mockTiendaRepository,
+        },
       ],
     }).compile();
 
     service = module.get<PaisService>(PaisService);
     repository = module.get(PaisRepository);
+    tiendaRepository = module.get(TiendaRepository);
   });
 
   it('should be defined', () => {
@@ -105,6 +115,29 @@ describe('PaisService', () => {
   });
 
   describe('delete', () => {
+    it('should delete pais when it has no tiendas', async () => {
+      repository.findById.mockResolvedValue(entity as any);
+      tiendaRepository.findAll.mockResolvedValue([]);
+      repository.delete.mockResolvedValue(true);
+
+      await service.delete('pais-1');
+
+      expect(tiendaRepository.findAll).toHaveBeenCalledWith({
+        paisId: 'pais-1',
+      });
+      expect(repository.delete).toHaveBeenCalledWith('pais-1');
+    });
+
+    it('should throw BadRequestException when pais has tiendas', async () => {
+      repository.findById.mockResolvedValue(entity as any);
+      tiendaRepository.findAll.mockResolvedValue([{ id: 'tienda-1' }] as any);
+
+      await expect(service.delete('pais-1')).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(repository.delete).not.toHaveBeenCalled();
+    });
+
     it('should throw NotFoundException when pais does not exist', async () => {
       repository.findById.mockResolvedValue(null);
 

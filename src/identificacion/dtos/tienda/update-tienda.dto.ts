@@ -23,6 +23,10 @@ export class UpdateTiendaDto {
   responsableId?: string;
 
   @IsOptional()
+  @IsUUID()
+  paisId?: string;
+
+  @IsOptional()
   @IsString()
   @MaxLength(100)
   rut?: string;

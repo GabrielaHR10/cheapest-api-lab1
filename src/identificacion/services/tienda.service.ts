@@ -9,7 +9,11 @@ import {
   TiendaResponseDto,
   UpdateTiendaDto,
 } from '../dtos';
-import { TiendaRepository, UsuarioRepository } from '../repositories';
+import {
+  PaisRepository,
+  TiendaRepository,
+  UsuarioRepository,
+} from '../repositories';
 import { Tienda } from '../repositories/entities';
 
 @Injectable()
@@ -17,6 +21,7 @@ export class TiendaService {
   constructor(
     private readonly tiendaRepository: TiendaRepository,
     private readonly usuarioRepository: UsuarioRepository,
+    private readonly paisRepository: PaisRepository,
   ) {}
 
   async create(dto: CreateTiendaDto): Promise<TiendaResponseDto> {
@@ -37,6 +42,12 @@ export class TiendaService {
       throw new BadRequestException(
         `Usuario con id ${dto.responsableId} no existe`,
       );
+    }
+
+    // Validar que el pais exista
+    const pais = await this.paisRepository.findById(dto.paisId);
+    if (!pais) {
+      throw new BadRequestException(`Pais con id ${dto.paisId} no existe`);
     }
 
     const tienda = await this.tiendaRepository.create(dto);
@@ -73,6 +84,13 @@ export class TiendaService {
       }
     }
 
+    if (dto.paisId) {
+      const pais = await this.paisRepository.findById(dto.paisId);
+      if (!pais) {
+        throw new BadRequestException(`Pais con id ${dto.paisId} no existe`);
+      }
+    }
+
     const updated = await this.tiendaRepository.update(id, dto);
     return this.mapToResponse(updated!);
   }
@@ -101,6 +119,7 @@ export class TiendaService {
       codigoInterno: tienda.codigoInterno,
       nombreComercial: tienda.nombreComercial,
       responsableId: tienda.responsableId,
+      paisId: tienda.paisId,
       rut: tienda.rut,
       direccion: tienda.direccion,
       telefono: tienda.telefono,

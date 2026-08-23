@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Tienda } from './tienda.entity';
 
 export enum Moneda {
   COP = 'COP',
@@ -31,4 +33,7 @@ export class Pais {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Tienda, (tienda) => tienda.pais)
+  tiendas: Tienda[];
 }

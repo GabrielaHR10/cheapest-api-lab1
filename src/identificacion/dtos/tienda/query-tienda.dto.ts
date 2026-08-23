@@ -15,6 +15,10 @@ export class QueryTiendaDto {
   responsableId?: string;
 
   @IsOptional()
+  @IsUUID()
+  paisId?: string;
+
+  @IsOptional()
   @IsEnum(EstadoCaptacion)
   estadoCaptacion?: EstadoCaptacion;
 }

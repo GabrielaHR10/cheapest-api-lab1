@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { DocumentoTienda } from './documento-tienda.entity';
+import { Pais } from './pais.entity';
 import { Usuario } from './usuario.entity';
 
 export enum EstadoCaptacion {
@@ -35,6 +36,9 @@ export class Tienda {
   @Column('uuid')
   responsableId: string;
 
+  @Column('uuid')
+  paisId: string;
+
   @Column('varchar', { length: 100 })
   rut: string;
 
@@ -60,6 +64,10 @@ export class Tienda {
   @ManyToOne(() => Usuario, (usuario) => usuario.tiendas)
   @JoinColumn({ name: 'responsableId' })
   responsable: Usuario;
+
+  @ManyToOne(() => Pais, (pais) => pais.tiendas)
+  @JoinColumn({ name: 'paisId' })
+  pais: Pais;
 
   @OneToMany(() => DocumentoTienda, (documento) => documento.tienda)
   documentos: DocumentoTienda[];

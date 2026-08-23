@@ -38,7 +38,11 @@ export class DocumentoTienda {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Tienda, (tienda) => tienda.documentos)
+  // onDelete CASCADE: un documento no existe sin su tienda (composicion).
+  // Es la base de datos la que borra los hijos, de forma atomica.
+  @ManyToOne(() => Tienda, (tienda) => tienda.documentos, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'tiendaId' })
   tienda: Tienda;
 }

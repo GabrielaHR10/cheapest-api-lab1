@@ -1,2007 +1,3034 @@
 {
-  "info": {
-    "_postman_id": "16e9d70e-cfa2-4c2d-aca9-b80013f04aab",
-    "name": "Cheapest API - Complete Collection",
-    "description": "Complete collection for testing all Cheapest API endpoints including Inventory, Logistics, and Sales",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Health Check",
-      "item": [
-        {
-          "name": "Get Health Check",
-          "id": "0324f096-14cb-4336-b03a-e25a246f0164",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                ""
-              ]
-            },
-            "description": "Health check endpoint to verify API is running"
-          },
-          "response": []
-        }
-      ],
-      "id": "8e2cf4eb-98a3-4590-b6d8-9c7dbe007435"
-    },
-    {
-      "name": "Inventory Items",
-      "item": [
-        {
-          "name": "Create Item",
-          "id": "5c4ea3e5-febb-4ebc-b8f7-f9507c61e1e5",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"productoId\": \"{{producto_id}}\",\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"cantidad\": 100,\n  \"precioVenta\": 25.50,\n  \"monedaId\": \"{{moneda_id}}\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/inventory/items",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "items"
-              ]
-            },
-            "description": "Create a new inventory item"
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Items",
-          "id": "1f5355f2-3803-4e94-b88c-1a10f09f192e",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/items",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "items"
-              ]
-            },
-            "description": "Get all inventory items (supports query parameters)"
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Items with Filters",
-          "id": "9510eb6a-8488-4604-8ee7-28a5a860be42",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/items?productoId={{producto_id}}&tiendaId={{tienda_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "items"
-              ],
-              "query": [
-                {
-                  "key": "productoId",
-                  "value": "{{producto_id}}",
-                  "description": "Filter by product ID"
-                },
-                {
-                  "key": "tiendaId",
-                  "value": "{{tienda_id}}",
-                  "description": "Filter by store ID"
-                }
-              ]
-            },
-            "description": "Get all inventory items with query filters"
-          },
-          "response": []
-        },
-        {
-          "name": "Get Item by ID",
-          "id": "b5872cf3-d3cd-4e28-9d74-a369eac731d9",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/items/{{item_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "items",
-                "{{item_id}}"
-              ]
-            },
-            "description": "Get a specific inventory item by ID"
-          },
-          "response": []
-        },
-        {
-          "name": "Update Item",
-          "id": "03c5126b-ae4f-437b-ba62-ff33a4b293b0",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"cantidad\": 150,\n  \"precioVenta\": 30.00\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/inventory/items/{{item_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "items",
-                "{{item_id}}"
-              ]
-            },
-            "description": "Update an inventory item (partial update)"
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Item",
-          "id": "88197f13-9d2e-4f97-ab1c-dc128852ad0a",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/items/{{item_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "items",
-                "{{item_id}}"
-              ]
-            },
-            "description": "Delete an inventory item"
-          },
-          "response": []
-        }
-      ],
-      "id": "d3e663d4-281c-4540-b190-6c49236d72f7"
-    },
-    {
-      "name": "Registro Compras",
-      "item": [
-        {
-          "name": "Create Compra",
-          "id": "579651bb-f760-44dd-8124-ad29897d4877",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"compraId\": \"{{compra_id}}\",\n  \"itemInventarioId\": \"{{item_id}}\",\n  \"fechaCompra\": \"2026-02-03T10:00:00.000Z\",\n  \"cantidad\": 50\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/inventory/compras",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "compras"
-              ]
-            },
-            "description": "Create a new purchase record"
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Compras",
-          "id": "7e49d27e-ac90-4c6d-873d-43cd90fa8e2a",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/compras",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "compras"
-              ]
-            },
-            "description": "Get all purchase records (supports query parameters)"
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Compras with Filters",
-          "id": "3f0c98e6-a6a8-496a-83c3-e09ba8e85845",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/compras?tiendaId={{tienda_id}}&productoId={{producto_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "compras"
-              ],
-              "query": [
-                {
-                  "key": "tiendaId",
-                  "value": "{{tienda_id}}",
-                  "description": "Filter by store ID"
-                },
-                {
-                  "key": "productoId",
-                  "value": "{{producto_id}}",
-                  "description": "Filter by product ID"
-                }
-              ]
-            },
-            "description": "Get all purchase records with query filters"
-          },
-          "response": []
-        },
-        {
-          "name": "Get Compra by ID",
-          "id": "428b81f7-c28f-4e41-9e8b-cd86edec3a18",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/compras/{{compra_registro_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "compras",
-                "{{compra_registro_id}}"
-              ]
-            },
-            "description": "Get a specific purchase record by ID"
-          },
-          "response": []
-        },
-        {
-          "name": "Update Compra",
-          "id": "0c0de3c0-5a10-4182-8c2f-3f2be6c7f399",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"cantidad\": 75,\n  \"fechaCompra\": \"2026-02-03T14:00:00.000Z\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/inventory/compras/{{compra_registro_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "compras",
-                "{{compra_registro_id}}"
-              ]
-            },
-            "description": "Update a purchase record (partial update)"
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Compra",
-          "id": "b7a30392-891c-474d-ac83-a454d7081cc6",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/compras/{{compra_registro_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "compras",
-                "{{compra_registro_id}}"
-              ]
-            },
-            "description": "Delete a purchase record"
-          },
-          "response": []
-        }
-      ],
-      "id": "29314be9-4079-424c-ba18-62a53b11d8cd"
-    },
-    {
-      "name": "Registro Ventas",
-      "item": [
-        {
-          "name": "Create Venta",
-          "id": "e52c87da-4617-4cf9-bc10-1b301e808de4",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"ventaId\": \"{{venta_id}}\",\n  \"itemInventarioId\": \"{{item_id}}\",\n  \"fechaVenta\": \"2026-02-03T12:00:00.000Z\",\n  \"cantidad\": 20\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/inventory/ventas",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "ventas"
-              ]
-            },
-            "description": "Create a new sale record"
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Ventas",
-          "id": "ca1cdc82-f9c2-4595-98fc-f258afd3758e",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/ventas",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "ventas"
-              ]
-            },
-            "description": "Get all sale records (supports query parameters)"
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Ventas with Filters",
-          "id": "7a5f7366-a338-45d6-85a0-fea575e07918",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/ventas?tiendaId={{tienda_id}}&productoId={{producto_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "ventas"
-              ],
-              "query": [
-                {
-                  "key": "tiendaId",
-                  "value": "{{tienda_id}}",
-                  "description": "Filter by store ID"
-                },
-                {
-                  "key": "productoId",
-                  "value": "{{producto_id}}",
-                  "description": "Filter by product ID"
-                }
-              ]
-            },
-            "description": "Get all sale records with query filters"
-          },
-          "response": []
-        },
-        {
-          "name": "Get Venta by ID",
-          "id": "499026fc-b864-47a8-8be3-c37c1f34b015",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/ventas/{{venta_registro_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "ventas",
-                "{{venta_registro_id}}"
-              ]
-            },
-            "description": "Get a specific sale record by ID"
-          },
-          "response": []
-        },
-        {
-          "name": "Update Venta",
-          "id": "235bed45-685c-4eb8-8d6f-cfdeeec66570",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"cantidad\": 25,\n  \"fechaVenta\": \"2026-02-03T15:00:00.000Z\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/inventory/ventas/{{venta_registro_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "ventas",
-                "{{venta_registro_id}}"
-              ]
-            },
-            "description": "Update a sale record (partial update)"
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Venta",
-          "id": "c3eba658-86d7-4fe3-9792-2b6bababe9ae",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/inventory/ventas/{{venta_registro_id}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "inventory",
-                "ventas",
-                "{{venta_registro_id}}"
-              ]
-            },
-            "description": "Delete a sale record"
-          },
-          "response": []
-        }
-      ],
-      "id": "6eb0e88d-54d9-40ff-96cd-5e0c39fc5372"
-    },
-    {
-      "name": "Logistics",
-      "item": [
-        {
-          "name": "Tendero",
-          "item": [
-            {
-              "name": "Get Productos Disponibles",
-              "id": "bb67bbf4-9fe0-4327-9a30-6ff756395a02",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/%20%20%20/productos-disponibles?tiendaId={{tienda_id}}&zona=Zona Norte",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "%20%20%20",
-                    "productos-disponibles"
-                  ],
-                  "query": [
-                    {
-                      "key": "tiendaId",
-                      "value": "{{tienda_id}}",
-                      "description": "Filter by store ID"
-                    },
-                    {
-                      "key": "zona",
-                      "value": "Zona Norte",
-                      "description": "Filter by catalog zone"
-                    }
-                  ]
-                },
-                "description": "Get available products for a store and zone using the current tendero endpoint path."
-              },
-              "response": []
-            }
-          ],
-          "id": "7e6de2b8-dd13-4f7c-8c3e-0cebb75f9c3c"
-        },
-        {
-          "name": "Catalogos",
-          "item": [
-            {
-              "name": "Create Catalogo",
-              "id": "3a52659c-1b1b-40b8-8e97-099683f39fd6",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"vigenciaDesde\": \"2026-01-01T00:00:00.000Z\",\n  \"vigenciaHasta\": \"2026-12-31T23:59:59.999Z\",\n  \"zona\": \"Zona Norte\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos"
-                  ]
-                },
-                "description": "Create a new catalogo"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Catalogos",
-              "id": "48cebe9b-ce3b-4237-8d10-56b4c8bf3b36",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos"
-                  ]
-                },
-                "description": "Get all catalogos"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Catalogo by ID",
-              "id": "7ff1e490-506e-4c98-b090-7db74701f149",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos",
-                    "{{catalogo_id}}"
-                  ]
-                },
-                "description": "Get a specific catalogo by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Catalogo",
-              "id": "f69e7a29-748a-47a7-bbee-5ae8e0e53339",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"vigenciaHasta\": \"2026-12-31T23:59:59.999Z\",\n  \"zona\": \"Zona Sur\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos",
-                    "{{catalogo_id}}"
-                  ]
-                },
-                "description": "Update a catalogo"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Catalogo",
-              "id": "c980fd3e-92c7-4d42-98de-c2b75b401af0",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos",
-                    "{{catalogo_id}}"
-                  ]
-                },
-                "description": "Delete a catalogo"
-              },
-              "response": []
-            }
-          ],
-          "id": "94681e0b-0e8d-4bba-bf86-238279a6de8d"
-        },
-        {
-          "name": "Catalogo Productos",
-          "item": [
-            {
-              "name": "Add Producto to Catalogo",
-              "id": "e11f49b6-8632-4ae8-9583-41920464e344",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"productoId\": \"{{producto_id}}\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}/productos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos",
-                    "{{catalogo_id}}",
-                    "productos"
-                  ]
-                },
-                "description": "Add a producto to catalogo"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Productos by Catalogo",
-              "id": "a72564e0-e5de-48aa-8d1c-7d331f18bf6f",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}/productos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos",
-                    "{{catalogo_id}}",
-                    "productos"
-                  ]
-                },
-                "description": "Get productos in catalogo"
-              },
-              "response": []
-            },
-            {
-              "name": "Remove Producto from Catalogo",
-              "id": "a69b521f-c104-4085-b7b5-4e765c1d8a39",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}/productos/{{producto_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "catalogos",
-                    "{{catalogo_id}}",
-                    "productos",
-                    "{{producto_id}}"
-                  ]
-                },
-                "description": "Remove producto from catalogo"
-              },
-              "response": []
-            }
-          ],
-          "id": "3bf1ae05-088a-49ac-bf39-3c77be0d7c4e"
-        },
-        {
-          "name": "Despachos",
-          "item": [
-            {
-              "name": "Create Despacho",
-              "id": "1654de3f-2731-4fbc-9cbc-6e41063fe7c8",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"pedidoId\": \"{{pedido_id}}\",\n  \"bodega\": \"Bodega Central\",\n  \"horaSalida\": \"2026-02-11T08:00:00.000Z\",\n  \"ventanaPrometidaInicio\": \"2026-02-11T10:00:00.000Z\",\n  \"ventanaPrometidaFin\": \"2026-02-11T14:00:00.000Z\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/despachos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "despachos"
-                  ]
-                },
-                "description": "Create a new despacho"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Despachos",
-              "id": "a2a000fe-a291-4d3c-8362-af98798f0639",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/despachos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "despachos"
-                  ]
-                },
-                "description": "Get all despachos"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Despacho by ID",
-              "id": "f90d43a9-829d-428a-a0ce-8f82f6cbfedc",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/despachos/{{despacho_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "despachos",
-                    "{{despacho_id}}"
-                  ]
-                },
-                "description": "Get a specific despacho by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Despacho",
-              "id": "eb86fe14-9193-496a-9a02-a7a3397a8ac4",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"ventanaPrometidaInicio\": \"2026-02-11T11:00:00.000Z\",\n  \"ventanaPrometidaFin\": \"2026-02-11T15:00:00.000Z\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/despachos/{{despacho_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "despachos",
-                    "{{despacho_id}}"
-                  ]
-                },
-                "description": "Update a despacho"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Despacho",
-              "id": "ae30e170-9a8c-4cb7-ae2e-73cbe43cc0be",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/despachos/{{despacho_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "despachos",
-                    "{{despacho_id}}"
-                  ]
-                },
-                "description": "Delete a despacho"
-              },
-              "response": []
-            }
-          ],
-          "id": "d7a635d0-1920-4eee-a89e-932f15056b77"
-        },
-        {
-          "name": "Disponibilidad Zona",
-          "item": [
-            {
-              "name": "Create Disponibilidad Zona",
-              "id": "04e3c319-e75d-4b13-9772-17046f4ab248",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"catalogoId\": \"{{catalogo_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"cantidadDisponible\": 100\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/disponibilidad-zona",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "disponibilidad-zona"
-                  ]
-                },
-                "description": "Create a new disponibilidad zona"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Disponibilidad Zona",
-              "id": "52da6bf7-c573-4857-b427-5d2353a75435",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/disponibilidad-zona",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "disponibilidad-zona"
-                  ]
-                },
-                "description": "Get all disponibilidad zona"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Disponibilidad Zona by ID",
-              "id": "3968c63e-1247-4ef7-aae0-9f092151a5cf",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/disponibilidad-zona/{{disponibilidad_zona_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "disponibilidad-zona",
-                    "{{disponibilidad_zona_id}}"
-                  ]
-                },
-                "description": "Get a specific disponibilidad zona by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Disponibilidad Zona",
-              "id": "8e4a48bc-a2a8-4bc1-868b-619a8499a92c",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"cantidadDisponible\": 150\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/disponibilidad-zona/{{disponibilidad_zona_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "disponibilidad-zona",
-                    "{{disponibilidad_zona_id}}"
-                  ]
-                },
-                "description": "Update a disponibilidad zona"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Disponibilidad Zona",
-              "id": "f99cd7c1-f895-4e40-b002-aeb48efbde47",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/disponibilidad-zona/{{disponibilidad_zona_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "disponibilidad-zona",
-                    "{{disponibilidad_zona_id}}"
-                  ]
-                },
-                "description": "Delete a disponibilidad zona"
-              },
-              "response": []
-            }
-          ],
-          "id": "16245fd6-0d7a-4e7d-afd0-9d323a4cd392"
-        },
-        {
-          "name": "Notas Credito",
-          "item": [
-            {
-              "name": "Create Nota Credito",
-              "id": "09a2360d-38a7-42b4-8687-3bee36fbb305",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"pedidoId\": \"{{pedido_id}}\",\n  \"numeroDocumento\": \"NC-2026-001\",\n  \"fecha\": \"2026-02-11T10:00:00.000Z\",\n  \"motivo\": \"productoVencido\",\n  \"monto\": 50.00,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"evidencia\": \"Foto del producto dañado\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/notas-credito",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "notas-credito"
-                  ]
-                },
-                "description": "Create a new nota credito"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Notas Credito",
-              "id": "e6cd7a34-c128-4309-8875-32cb6411895a",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/notas-credito",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "notas-credito"
-                  ]
-                },
-                "description": "Get all notas credito"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Nota Credito by ID",
-              "id": "04b141dd-3e19-4ad1-a525-b49b07a4398f",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/notas-credito/{{nota_credito_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "notas-credito",
-                    "{{nota_credito_id}}"
-                  ]
-                },
-                "description": "Get a specific nota credito by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Nota Credito",
-              "id": "1eda7be2-84b2-47d2-8e36-7beee9051b7d",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"monto\": 75.00,\n  \"evidencia\": \"Evidencia actualizada\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/notas-credito/{{nota_credito_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "notas-credito",
-                    "{{nota_credito_id}}"
-                  ]
-                },
-                "description": "Update a nota credito"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Nota Credito",
-              "id": "564cad57-ab9f-4f3f-bc08-0c2dc58f5a7b",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/notas-credito/{{nota_credito_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "notas-credito",
-                    "{{nota_credito_id}}"
-                  ]
-                },
-                "description": "Delete a nota credito"
-              },
-              "response": []
-            }
-          ],
-          "id": "39645f64-684c-4ef7-916c-9cf93a440b13"
-        },
-        {
-          "name": "Pedidos",
-          "item": [
-            {
-              "name": "Create Pedido",
-              "id": "7a1fd58d-609c-43ab-8d7e-b602d184ef43",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"identificador\": \"PED-2026-001\",\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"fechaHoraCreacion\": \"2026-02-11T10:00:00.000Z\",\n  \"montoTotal\": 150.00,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"items\": [\n    {\n      \"productoId\": \"{{producto_id}}\",\n      \"cantidad\": 10,\n      \"precioUnitario\": 15.00,\n      \"descuento\": 0,\n      \"monedaId\": \"{{moneda_id}}\"\n    }\n  ]\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/pedidos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "pedidos"
-                  ]
-                },
-                "description": "Create a new pedido"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Pedidos",
-              "id": "bd857c8f-cac7-444b-81fa-eb446c4cc518",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/pedidos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "pedidos"
-                  ]
-                },
-                "description": "Get all pedidos"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Pedido by ID",
-              "id": "6dda1c24-f18d-4875-8ea7-ee44dbcca9aa",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/pedidos/{{pedido_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "pedidos",
-                    "{{pedido_id}}"
-                  ]
-                },
-                "description": "Get a specific pedido by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Pedido",
-              "id": "f1773dec-6cf1-4d7d-a42d-e80604f09049",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"estado\": \"aprobado\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/pedidos/{{pedido_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "pedidos",
-                    "{{pedido_id}}"
-                  ]
-                },
-                "description": "Update a pedido"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Pedido",
-              "id": "3f39cfa2-07fd-4b0a-ae08-d610fbbdfc4f",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/pedidos/{{pedido_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "pedidos",
-                    "{{pedido_id}}"
-                  ]
-                },
-                "description": "Delete a pedido"
-              },
-              "response": []
-            }
-          ],
-          "id": "c708114c-d87b-4ebc-ac9e-fe2aeffedd67"
-        },
-        {
-          "name": "Productos",
-          "item": [
-            {
-              "name": "Create Producto",
-              "id": "afef454a-c7ef-4dfd-8d4a-24957bea624e",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"codigoInterno\": \"PROD001\",\n  \"codigoBarras\": \"7501234567890\",\n  \"nombre\": \"Coca Cola 2L\",\n  \"marca\": \"Coca Cola\",\n  \"categoria\": \"Bebidas\",\n  \"presentacion\": \"2L\",\n  \"precioBase\": 25.50,\n  \"monedaId\": \"{{moneda_id}}\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/productos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "productos"
-                  ]
-                },
-                "description": "Create a new producto"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Productos",
-              "id": "d2f68a76-bbbb-4e78-99a2-557bac926134",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/productos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "productos"
-                  ]
-                },
-                "description": "Get all productos"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Producto by ID",
-              "id": "8a600b26-5990-47d5-b6b7-207e7ea33ceb",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/productos/{{producto_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "productos",
-                    "{{producto_id}}"
-                  ]
-                },
-                "description": "Get a specific producto by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Producto",
-              "id": "a508e80b-54a0-47d8-8936-bc8d537b2b6f",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"precioBase\": 28.00,\n  \"presentacion\": \"2.5L\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/productos/{{producto_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "productos",
-                    "{{producto_id}}"
-                  ]
-                },
-                "description": "Update a producto"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Producto",
-              "id": "6ebca05f-43d0-49cc-a8ea-8870c071bf69",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/productos/{{producto_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "productos",
-                    "{{producto_id}}"
-                  ]
-                },
-                "description": "Delete a producto"
-              },
-              "response": []
-            }
-          ],
-          "id": "8bd201b3-8a30-4da4-b3f8-5bd42c205011"
-        },
-        {
-          "name": "Promociones",
-          "item": [
-            {
-              "name": "Create Promocion",
-              "id": "8228c98b-c785-414e-b236-60dcdec8c898",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"nombre\": \"Descuento especial\",\n  \"precioPromocional\": 20.00,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"tiendaIds\": [\"{{tienda_id}}\"],\n  \"inicio\": \"2026-02-01T00:00:00.000Z\",\n  \"fin\": \"2026-02-28T23:59:59.999Z\",\n  \"restricciones\": 0\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/promociones",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "promociones"
-                  ]
-                },
-                "description": "Create a new promocion"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Promociones",
-              "id": "bec3cac9-e96f-42ad-8e15-7b9834e004b5",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/promociones",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "promociones"
-                  ]
-                },
-                "description": "Get all promociones"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Promocion by ID",
-              "id": "42c15b7b-cb83-46d5-a0be-3b89b25de1ac",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/promociones/{{promocion_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "promociones",
-                    "{{promocion_id}}"
-                  ]
-                },
-                "description": "Get a specific promocion by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Promocion",
-              "id": "33c8a5b5-45c8-4d36-9f0d-ff454d5a14bc",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"precioPromocional\": 18.00,\n  \"fin\": \"2026-03-15T23:59:59.999Z\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/logistics/promociones/{{promocion_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "promociones",
-                    "{{promocion_id}}"
-                  ]
-                },
-                "description": "Update a promocion"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Promocion",
-              "id": "433df704-7925-4fc1-933d-386543b576af",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/logistics/promociones/{{promocion_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "logistics",
-                    "promociones",
-                    "{{promocion_id}}"
-                  ]
-                },
-                "description": "Delete a promocion"
-              },
-              "response": []
-            }
-          ],
-          "id": "bbf62ca3-9184-414d-9ecd-046bcd59c55b"
-        }
-      ],
-      "id": "53da10bb-1f18-43bb-b7dc-8d26d3c862de"
-    },
-    {
-      "name": "Sales (Ventas)",
-      "item": [
-        {
-          "name": "Productos Externos",
-          "item": [
-            {
-              "name": "Create Producto Externo",
-              "id": "5366cf4f-4eee-4e5b-9575-3fac245c4ffe",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"codigoBarras\": \"7501234567890\",\n  \"nombre\": \"Coca Cola 2L\",\n  \"categoria\": \"Bebidas\",\n  \"precioBase\": 25.50,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"cantidad\": 100.0\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/ventas/productos-externos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "productos-externos"
-                  ]
-                },
-                "description": "Create a new external product"
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Productos Externos",
-              "id": "74f75d0a-e8ce-492a-8ede-4e7f82974e3b",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/productos-externos",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "productos-externos"
-                  ]
-                },
-                "description": "Get all external products (supports query parameters)"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Productos Externos with Filters",
-              "id": "be2e7043-1ee3-4775-874d-80dccbecfcbb",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/productos-externos?tiendaId={{tienda_id}}&categoria=Bebidas&nombre=Coca",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "productos-externos"
-                  ],
-                  "query": [
-                    {
-                      "key": "tiendaId",
-                      "value": "{{tienda_id}}",
-                      "description": "Filter by store ID"
-                    },
-                    {
-                      "key": "categoria",
-                      "value": "Bebidas",
-                      "description": "Filter by category"
-                    },
-                    {
-                      "key": "nombre",
-                      "value": "Coca",
-                      "description": "Filter by name (partial match)"
-                    },
-                    {
-                      "key": "codigoBarras",
-                      "value": "7501234567890",
-                      "description": "Filter by barcode",
-                      "disabled": true
-                    }
-                  ]
-                },
-                "description": "Get external products with query filters"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Producto Externo by ID",
-              "id": "b04db5a7-2b48-4792-9d30-4d1ca8c9ab59",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/productos-externos/{{producto_externo_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "productos-externos",
-                    "{{producto_externo_id}}"
-                  ]
-                },
-                "description": "Get a specific external product by ID"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Producto Externo",
-              "id": "8d0b490e-d51e-44a2-b05a-6901bff3b85c",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"precioBase\": 30.00,\n  \"cantidad\": 150.0\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/ventas/productos-externos/{{producto_externo_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "productos-externos",
-                    "{{producto_externo_id}}"
-                  ]
-                },
-                "description": "Update an external product (partial update)"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Producto Externo",
-              "id": "8cd3029b-e9da-4650-b257-be60e277a101",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/productos-externos/{{producto_externo_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "productos-externos",
-                    "{{producto_externo_id}}"
-                  ]
-                },
-                "description": "Delete an external product"
-              },
-              "response": []
-            }
-          ],
-          "id": "9c3bdd6b-feca-4f36-8b5c-1f6f9ce768ee"
-        },
-        {
-          "name": "Ventas",
-          "item": [
-            {
-              "name": "Create Venta",
-              "id": "9ac1fefc-bff0-404b-b2a7-58698144b840",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"fechaHora\": \"2026-02-09T10:30:00.000Z\",\n  \"monedaId\": \"{{moneda_id}}\",\n  \"items\": [\n    {\n      \"productoExternoId\": \"{{producto_externo_id}}\",\n      \"cantidad\": 2,\n      \"precioUnitario\": 26.00\n    },\n    {\n      \"productoExternoId\": \"{{producto_externo_id}}\",\n      \"cantidad\": 3,\n      \"precioUnitario\": 26.00\n    }\n  ]\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas"
-                  ]
-                },
-                "description": "Create a new sale with items. Total is automatically calculated."
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Ventas",
-              "id": "78ae9f3b-228f-4edf-be06-36fd89d84a05",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas"
-                  ]
-                },
-                "description": "Get all sales (supports query parameters)"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Ventas with Filters",
-              "id": "f415d62f-6f12-44bb-85e3-43d48fac5223",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas?tiendaId={{tienda_id}}&fechaDesde=2026-01-01T00:00:00.000Z&fechaHasta=2026-12-31T23:59:59.999Z",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas"
-                  ],
-                  "query": [
-                    {
-                      "key": "tiendaId",
-                      "value": "{{tienda_id}}",
-                      "description": "Filter by store ID"
-                    },
-                    {
-                      "key": "fechaDesde",
-                      "value": "2026-01-01T00:00:00.000Z",
-                      "description": "Filter by start date (inclusive)"
-                    },
-                    {
-                      "key": "fechaHasta",
-                      "value": "2026-12-31T23:59:59.999Z",
-                      "description": "Filter by end date (inclusive)"
-                    },
-                    {
-                      "key": "productoExternoId",
-                      "value": "{{producto_externo_id}}",
-                      "description": "Filter by external product ID",
-                      "disabled": true
-                    }
-                  ]
-                },
-                "description": "Get sales with query filters"
-              },
-              "response": []
-            },
-            {
-              "name": "Get Venta by ID",
-              "id": "c58d1805-2d38-48ec-a32e-b89fd8023fa5",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas",
-                    "{{venta_ventas_id}}"
-                  ]
-                },
-                "description": "Get a specific sale by ID with all items"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Venta - Items",
-              "id": "1a0b4bc3-25ef-4efc-be5c-dfbbd107a030",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"items\": [\n    {\n      \"productoExternoId\": \"{{producto_externo_id}}\",\n      \"cantidad\": 5,\n      \"precioUnitario\": 20.00\n    }\n  ]\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas",
-                    "{{venta_ventas_id}}"
-                  ]
-                },
-                "description": "Update sale items (replaces all items, recalculates total)"
-              },
-              "response": []
-            },
-            {
-              "name": "Update Venta - Fecha",
-              "id": "40e8ccd5-3373-4d85-9aab-566317410417",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"fechaHora\": \"2026-02-10T15:00:00.000Z\"\n}"
-                },
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas",
-                    "{{venta_ventas_id}}"
-                  ]
-                },
-                "description": "Update sale date/time only (total unchanged)"
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Venta",
-              "id": "7100095f-71f1-4076-94c6-ab8bd50f0f3e",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "ventas",
-                    "ventas",
-                    "{{venta_ventas_id}}"
-                  ]
-                },
-                "description": "Delete a sale (cascade deletes all items)"
-              },
-              "response": []
-            }
-          ],
-          "id": "7b138c8c-88ea-4b37-9c20-f2ac380c331e"
-        }
-      ],
-      "id": "fff1a07f-e9e2-4def-849b-8df7b0325486"
-    }
-  ],
-  "variable": [
-    {
-      "id": "bbb8cb07-b1ac-452a-ae4e-a6225b7add32",
-      "key": "base_url",
-      "value": "http://localhost:3000",
-      "type": "string"
-    },
-    {
-      "id": "b38bd13b-2780-4023-9f49-dd8083ba6d9b",
-      "key": "producto_id",
-      "value": "3c726f6c-1ed9-471a-92d0-2a234e8303ad",
-      "type": "string"
-    },
-    {
-      "id": "8bc115a5-6ec1-4bd6-8967-625cf03b547f",
-      "key": "tienda_id",
-      "value": "862bd02f-046f-40f6-bdf3-ab58f388337a",
-      "type": "string"
-    },
-    {
-      "id": "36f95af5-16ea-45a3-9ea7-6eb315567821",
-      "key": "moneda_id",
-      "value": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-      "type": "string"
-    },
-    {
-      "id": "48eff588-451d-4012-b375-2296ef3370b3",
-      "key": "item_id",
-      "value": "cccb8cac-bc7f-49e6-8658-93b917282f60",
-      "type": "string"
-    },
-    {
-      "id": "84f74b9c-4d15-4688-9fac-0d77f11dfdda",
-      "key": "compra_id",
-      "value": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-      "type": "string"
-    },
-    {
-      "id": "92bb32f1-a839-45ee-b4b5-ada50a7bfbe7",
-      "key": "venta_id",
-      "value": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
-      "type": "string"
-    },
-    {
-      "id": "f64f911c-b7f1-4ca8-b391-308e068c4a67",
-      "key": "compra_registro_id",
-      "value": "31a2ad91-46f5-4843-b0be-df6676eee479",
-      "type": "string"
-    },
-    {
-      "id": "8d36c125-16c5-48b4-ab03-e4a0982c11ed",
-      "key": "venta_registro_id",
-      "value": "b8557555-f0f4-4dfe-9903-aa94e1603317",
-      "type": "string"
-    },
-    {
-      "id": "067df565-d48d-4048-b6e6-97d65bf297f6",
-      "key": "catalogo_id",
-      "value": "3b594d7b-0cf8-4bfa-878e-4160650bf308",
-      "type": "string"
-    },
-    {
-      "id": "fd65e8ca-1668-4cab-845e-cba5724c6214",
-      "key": "despacho_id",
-      "value": "3dd154ea-2220-4333-8d1d-fe1e7d70882e",
-      "type": "string"
-    },
-    {
-      "id": "3a491b3c-c9ad-4f2e-8df9-020006baab66",
-      "key": "pedido_id",
-      "value": "1b22bfb1-6596-4bc7-8601-db4641aff6f1",
-      "type": "string"
-    },
-    {
-      "id": "cfbe896a-094a-498c-a916-680b84d12535",
-      "key": "promocion_id",
-      "value": "ed0d8373-334f-42d6-8bb4-1be9df96535c",
-      "type": "string"
-    },
-    {
-      "id": "29971d56-69ab-4916-9874-1978e27d1d73",
-      "key": "nota_credito_id",
-      "value": "4ccbf6ca-6b75-40dc-a9e7-b0398eaed093",
-      "type": "string"
-    },
-    {
-      "id": "7a5760f1-dc80-4271-8344-22890a244dd1",
-      "key": "disponibilidad_zona_id",
-      "value": "d0eb7377-1086-416b-9cc6-fd6a2c912d71",
-      "type": "string"
-    },
-    {
-      "id": "e18e269d-281c-4f1b-ad30-0f2563b4d6a2",
-      "key": "producto_externo_id",
-      "value": "pex11111-1111-1111-1111-111111111111",
-      "type": "string"
-    },
-    {
-      "id": "a0fad954-1b6b-4dd5-b229-64e4aeb40695",
-      "key": "venta_ventas_id",
-      "value": "ven11111-1111-1111-1111-111111111111",
-      "type": "string"
-    }
-  ]
+	"info": {
+		"_postman_id": "16e9d70e-cfa2-4c2d-aca9-b80013f04aab",
+		"name": "Cheapest API - Complete Collection",
+		"description": "Coleccion completa de la API de Cheapest: Identification, Inventory, Logistics y Sales. Los valores por defecto de las variables corresponden a los datos que siembra DatabaseSeederService, de modo que la coleccion funciona sobre una base recien creada sin editar nada.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Get Health Check",
+					"id": "0324f096-14cb-4336-b03a-e25a246f0164",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Health check endpoint to verify API is running"
+					},
+					"response": []
+				}
+			],
+			"id": "8e2cf4eb-98a3-4590-b6d8-9c7dbe007435"
+		},
+		{
+			"name": "Identification",
+			"id": "5eaab884-55fb-41a2-963a-a59c667b85b0",
+			"description": "Módulo de Identificación y Autenticación (entregable 2.1). Las carpetas están numeradas: si se ejecuta la colección en orden, cada una deja preparado lo que necesita la siguiente.",
+			"item": [
+				{
+					"name": "1. Usuarios",
+					"id": "96fec424-0f46-4aef-b50f-dcb6e7826ffd",
+					"description": "CRUD del usuario responsable de una tienda.",
+					"item": [
+						{
+							"name": "Create Usuario",
+							"id": "4315ec3e-63d2-4708-8fe2-8de359fa14bd",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios"
+									]
+								},
+								"description": "Perfiles válidos: tendero, cajero, vendedor, operador, supervisor. Guarda el id en {{usuario_id}}.",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Ana Torres\",\n  \"telefono\": \"3001234567\",\n  \"perfil\": \"tendero\"\n}"
+								}
+							},
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"  pm.collectionVariables.set('usuario_id', pm.response.json().id);",
+											"}"
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Get All Usuarios",
+							"id": "bea013e0-2568-4012-ae8c-8cf10c4243bd",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Usuarios with Filters",
+							"id": "20af9069-41d6-45ef-b374-661da833c127",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios?nombre=Ana&perfil=tendero",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": "Ana",
+											"description": "Parcial, ILIKE"
+										},
+										{
+											"key": "perfil",
+											"value": "tendero",
+											"description": "Exacto"
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Usuario by ID",
+							"id": "34e53bd3-9f66-47b4-bc96-b301a9ed0ca0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios/{{usuario_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios",
+										"{{usuario_id}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Update Usuario",
+							"id": "4e963c67-1652-4f84-bf23-de74fd215fab",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios/{{usuario_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios",
+										"{{usuario_id}}"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"telefono\": \"3009998877\"\n}"
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "2. Paises",
+					"id": "5be84ab0-d44f-4880-96d8-5df4c2179a44",
+					"description": "CRUD del país en el que opera una tienda.",
+					"item": [
+						{
+							"name": "Create Pais",
+							"id": "4bad3c81-b8f7-41db-bf5a-75efcea5f070",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises"
+									]
+								},
+								"description": "Monedas válidas: COP, MXN, BRL. Guarda el id en {{pais_id}}.",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Peru\",\n  \"moneda\": \"COP\"\n}"
+								}
+							},
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"  pm.collectionVariables.set('pais_id', pm.response.json().id);",
+											"}"
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Get All Paises",
+							"id": "e3972897-4005-4e26-a2b0-f934b208550e",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Paises with Filters",
+							"id": "45fcdf3d-aa9a-4070-9127-d1dfc9c5afe8",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises?nombre=Per&moneda=COP",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises"
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": "Per",
+											"description": "Parcial, ILIKE"
+										},
+										{
+											"key": "moneda",
+											"value": "COP",
+											"description": "Exacto"
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pais by ID",
+							"id": "6bfd73a5-7b29-4944-89b1-b9d5c9465513",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises/{{pais_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises",
+										"{{pais_id}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Update Pais",
+							"id": "fe72ada2-531b-4c0d-a958-6e72d0c27c9d",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises/{{pais_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises",
+										"{{pais_id}}"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"moneda\": \"MXN\"\n}"
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3. Tiendas",
+					"id": "e1565460-92c7-4e27-ad08-b9d50fd2c313",
+					"description": "CRUD de Tienda — el entregable 2.1 de la rúbrica.",
+					"item": [
+						{
+							"name": "Create Tienda",
+							"id": "6f32d70d-9cbc-4431-8b78-28b3b5157d95",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									]
+								},
+								"description": "Requiere responsableId y paisId existentes. estadoCaptacion es opcional. Guarda el id en {{tienda_id}}.",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoInterno\": \"TC100\",\n  \"nombreComercial\": \"Tienda Demo\",\n  \"responsableId\": \"{{usuario_id}}\",\n  \"paisId\": \"{{pais_id}}\",\n  \"rut\": \"900123456-1\",\n  \"direccion\": \"Cra 7 #45-12\",\n  \"telefono\": \"3001112233\",\n  \"estadoCaptacion\": \"prospectoCreado\"\n}"
+								}
+							},
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"  pm.collectionVariables.set('tienda_id', pm.response.json().id);",
+											"}"
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Get All Tiendas",
+							"id": "277f92cd-effd-49e2-8e19-78ada87a7945",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tiendas with Filters",
+							"id": "1f509dbb-27a3-40c6-aa1e-2a713ff372d1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas?codigoInterno=TC100&nombreComercial=Demo&responsableId={{usuario_id}}&paisId={{pais_id}}&estadoCaptacion=prospectoCreado",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									],
+									"query": [
+										{
+											"key": "codigoInterno",
+											"value": "TC100",
+											"description": "Exacto"
+										},
+										{
+											"key": "nombreComercial",
+											"value": "Demo",
+											"description": "Parcial, ILIKE"
+										},
+										{
+											"key": "responsableId",
+											"value": "{{usuario_id}}",
+											"description": "Tiendas de un responsable"
+										},
+										{
+											"key": "paisId",
+											"value": "{{pais_id}}",
+											"description": "Tiendas de un país"
+										},
+										{
+											"key": "estadoCaptacion",
+											"value": "prospectoCreado",
+											"description": "Estado de captación"
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tienda by ID",
+							"id": "256744e5-98de-42b6-9b07-7bc91bc00ca6",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas/{{tienda_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas",
+										"{{tienda_id}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Update Tienda",
+							"id": "b09cc301-d906-44e0-b9fb-e396097f6067",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas/{{tienda_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas",
+										"{{tienda_id}}"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"estadoCaptacion\": \"rutValidado\"\n}"
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4. Documentos de Tienda",
+					"id": "9de78359-c27e-487a-897d-232cc4dc2973",
+					"description": "Documentos recibidos durante la captación de una tienda.",
+					"item": [
+						{
+							"name": "Create Documento",
+							"id": "5693527e-62b7-4915-879a-c2d5304156ae",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/documentos-tienda",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"documentos-tienda"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"tipo\": \"RUT\",\n  \"numero\": \"900123456-1\",\n  \"direccion\": \"Cra 7 #45-12\",\n  \"fechaRecepcion\": \"2026-01-10T09:00:00.000Z\",\n  \"validado\": false\n}"
+								}
+							},
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"if (pm.response.code === 201) {",
+											"  pm.collectionVariables.set('documento_tienda_id', pm.response.json().id);",
+											"}"
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Get All Documentos",
+							"id": "4b0da02f-6a12-4e18-8496-145ec24fbb99",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/documentos-tienda",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"documentos-tienda"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Documentos with Filters",
+							"id": "89f2b379-3739-443f-a68e-65b553a7f310",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/documentos-tienda?tiendaId={{tienda_id}}&tipo=RUT",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"documentos-tienda"
+									],
+									"query": [
+										{
+											"key": "tiendaId",
+											"value": "{{tienda_id}}",
+											"description": "Documentos de una tienda"
+										},
+										{
+											"key": "tipo",
+											"value": "RUT",
+											"description": "Tipo de documento"
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Documento by ID",
+							"id": "c947513c-0f36-49b2-a547-f84fd8fa2868",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/documentos-tienda/{{documento_tienda_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"documentos-tienda",
+										"{{documento_tienda_id}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Validar Documento",
+							"id": "701eeab4-8793-49b7-8106-7faa895484fd",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/documentos-tienda/{{documento_tienda_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"documentos-tienda",
+										"{{documento_tienda_id}}"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"validado\": true\n}"
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "5. Validacion y manejo de errores",
+					"id": "8393a7c6-09b0-48b4-97ed-9de65915aa7a",
+					"description": "Casos de error. Requiere haber ejecutado las carpetas 1 a 4.",
+					"item": [
+						{
+							"name": "400 - Tienda sin campos obligatorios",
+							"id": "79642b69-d922-4947-b726-5afe1a37cb8a",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									]
+								},
+								"description": "ValidationPipe devuelve los mensajes de class-validator.",
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tienda con codigoInterno duplicado",
+							"id": "92aec1b6-5047-4e06-9921-bf306a7f8759",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									]
+								},
+								"description": "Usa TC001, que siempre existe porque lo siembra DatabaseSeederService. Asi la peticion devuelve 400 tanto si se ejecuta suelta como dentro del flujo completo.",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoInterno\": \"TC001\",\n  \"nombreComercial\": \"Duplicada\",\n  \"responsableId\": \"{{usuario_id}}\",\n  \"paisId\": \"{{pais_id}}\",\n  \"rut\": \"1\",\n  \"direccion\": \"d\",\n  \"telefono\": \"3\"\n}"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tienda con responsable inexistente",
+							"id": "5547f7f3-fe6f-467d-a05d-5957fd4ba07e",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoInterno\": \"TX01\",\n  \"nombreComercial\": \"X\",\n  \"responsableId\": \"11111111-1111-4111-8111-111111111111\",\n  \"paisId\": \"{{pais_id}}\",\n  \"rut\": \"1\",\n  \"direccion\": \"d\",\n  \"telefono\": \"3\"\n}"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tienda con pais inexistente",
+							"id": "d44f167a-fcd8-487f-a89f-f90cdc1511e7",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoInterno\": \"TX02\",\n  \"nombreComercial\": \"X\",\n  \"responsableId\": \"{{usuario_id}}\",\n  \"paisId\": \"11111111-1111-4111-8111-111111111111\",\n  \"rut\": \"1\",\n  \"direccion\": \"d\",\n  \"telefono\": \"3\"\n}"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Usuario con perfil invalido",
+							"id": "afd272ab-2da4-4673-8eba-5465faa93a2c",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios"
+									]
+								},
+								"description": "",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"X\",\n  \"telefono\": \"3\",\n  \"perfil\": \"jefe\"\n}"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - Tienda inexistente",
+							"id": "3086b65c-3c1a-48d0-a603-570722524bb1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas/11111111-1111-4111-8111-111111111111",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas",
+										"11111111-1111-4111-8111-111111111111"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Borrar usuario que es responsable",
+							"id": "3f05c95e-91fa-4cf6-8395-4f080c8fbd26",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios/{{usuario_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios",
+										"{{usuario_id}}"
+									]
+								},
+								"description": "Devuelve 400 con el motivo, no 500."
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Borrar pais con tiendas asociadas",
+							"id": "48d14e3f-1cb1-4515-b945-57503b87e249",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises/{{pais_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises",
+										"{{pais_id}}"
+									]
+								},
+								"description": "Devuelve 400 con el motivo, no 500."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "6. Limpieza (ejecutar al final)",
+					"id": "9e9f3127-bb01-4479-8d0d-788efc2eb78c",
+					"description": "Borrados en orden inverso de dependencia, para que la colección pueda volver a ejecutarse.",
+					"item": [
+						{
+							"name": "Delete Tienda",
+							"id": "5d11c30b-6a37-4f51-b7c3-fec063091459",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/tiendas/{{tienda_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"tiendas",
+										"{{tienda_id}}"
+									]
+								},
+								"description": "Elimina la tienda y, en cascada, sus documentos."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Usuario",
+							"id": "ddbf56ab-6513-46f1-85d7-331bd8a351d0",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/usuarios/{{usuario_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"usuarios",
+										"{{usuario_id}}"
+									]
+								},
+								"description": "Ahora sí procede: ya no es responsable de ninguna tienda."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pais",
+							"id": "2bf12cb7-2e5d-4255-9863-3097bd2fa4e9",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/identificacion/paises/{{pais_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"identificacion",
+										"paises",
+										"{{pais_id}}"
+									]
+								},
+								"description": "Ahora sí procede: ya no tiene tiendas asociadas."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Inventory Items",
+			"item": [
+				{
+					"name": "Create Item",
+					"id": "5c4ea3e5-febb-4ebc-b8f7-f9507c61e1e5",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productoId\": \"{{producto_id}}\",\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"cantidad\": 100,\n  \"precioVenta\": 25.50,\n  \"monedaId\": \"{{moneda_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/items",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"items"
+							]
+						},
+						"description": "Create a new inventory item"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Items",
+					"id": "1f5355f2-3803-4e94-b88c-1a10f09f192e",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/items",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"items"
+							]
+						},
+						"description": "Get all inventory items (supports query parameters)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Items with Filters",
+					"id": "9510eb6a-8488-4604-8ee7-28a5a860be42",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/items?productoId={{producto_id}}&tiendaId={{tienda_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"items"
+							],
+							"query": [
+								{
+									"key": "productoId",
+									"value": "{{producto_id}}",
+									"description": "Filter by product ID"
+								},
+								{
+									"key": "tiendaId",
+									"value": "{{tienda_id}}",
+									"description": "Filter by store ID"
+								}
+							]
+						},
+						"description": "Get all inventory items with query filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Item by ID",
+					"id": "b5872cf3-d3cd-4e28-9d74-a369eac731d9",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/items/{{item_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"items",
+								"{{item_id}}"
+							]
+						},
+						"description": "Get a specific inventory item by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item",
+					"id": "03c5126b-ae4f-437b-ba62-ff33a4b293b0",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cantidad\": 150,\n  \"precioVenta\": 30.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/items/{{item_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"items",
+								"{{item_id}}"
+							]
+						},
+						"description": "Update an inventory item (partial update)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"id": "88197f13-9d2e-4f97-ab1c-dc128852ad0a",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/items/{{item_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"items",
+								"{{item_id}}"
+							]
+						},
+						"description": "Delete an inventory item"
+					},
+					"response": []
+				}
+			],
+			"id": "d3e663d4-281c-4540-b190-6c49236d72f7"
+		},
+		{
+			"name": "Registro Compras",
+			"item": [
+				{
+					"name": "Create Compra",
+					"id": "579651bb-f760-44dd-8124-ad29897d4877",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"compraId\": \"{{compra_id}}\",\n  \"itemInventarioId\": \"{{item_id}}\",\n  \"fechaCompra\": \"2026-02-03T10:00:00.000Z\",\n  \"cantidad\": 50\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/compras",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"compras"
+							]
+						},
+						"description": "Create a new purchase record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Compras",
+					"id": "7e49d27e-ac90-4c6d-873d-43cd90fa8e2a",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/compras",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"compras"
+							]
+						},
+						"description": "Get all purchase records (supports query parameters)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Compras with Filters",
+					"id": "3f0c98e6-a6a8-496a-83c3-e09ba8e85845",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/compras?tiendaId={{tienda_id}}&productoId={{producto_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"compras"
+							],
+							"query": [
+								{
+									"key": "tiendaId",
+									"value": "{{tienda_id}}",
+									"description": "Filter by store ID"
+								},
+								{
+									"key": "productoId",
+									"value": "{{producto_id}}",
+									"description": "Filter by product ID"
+								}
+							]
+						},
+						"description": "Get all purchase records with query filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Compra by ID",
+					"id": "428b81f7-c28f-4e41-9e8b-cd86edec3a18",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/compras/{{compra_registro_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"compras",
+								"{{compra_registro_id}}"
+							]
+						},
+						"description": "Get a specific purchase record by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Compra",
+					"id": "0c0de3c0-5a10-4182-8c2f-3f2be6c7f399",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cantidad\": 75,\n  \"fechaCompra\": \"2026-02-03T14:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/compras/{{compra_registro_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"compras",
+								"{{compra_registro_id}}"
+							]
+						},
+						"description": "Update a purchase record (partial update)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Compra",
+					"id": "b7a30392-891c-474d-ac83-a454d7081cc6",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/compras/{{compra_registro_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"compras",
+								"{{compra_registro_id}}"
+							]
+						},
+						"description": "Delete a purchase record"
+					},
+					"response": []
+				}
+			],
+			"id": "29314be9-4079-424c-ba18-62a53b11d8cd"
+		},
+		{
+			"name": "Registro Ventas",
+			"item": [
+				{
+					"name": "Create Venta",
+					"id": "e52c87da-4617-4cf9-bc10-1b301e808de4",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"ventaId\": \"{{venta_id}}\",\n  \"itemInventarioId\": \"{{item_id}}\",\n  \"fechaVenta\": \"2026-02-03T12:00:00.000Z\",\n  \"cantidad\": 20\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/ventas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"ventas"
+							]
+						},
+						"description": "Create a new sale record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Ventas",
+					"id": "ca1cdc82-f9c2-4595-98fc-f258afd3758e",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/ventas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"ventas"
+							]
+						},
+						"description": "Get all sale records (supports query parameters)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Ventas with Filters",
+					"id": "7a5f7366-a338-45d6-85a0-fea575e07918",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/ventas?tiendaId={{tienda_id}}&productoId={{producto_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"ventas"
+							],
+							"query": [
+								{
+									"key": "tiendaId",
+									"value": "{{tienda_id}}",
+									"description": "Filter by store ID"
+								},
+								{
+									"key": "productoId",
+									"value": "{{producto_id}}",
+									"description": "Filter by product ID"
+								}
+							]
+						},
+						"description": "Get all sale records with query filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Venta by ID",
+					"id": "499026fc-b864-47a8-8be3-c37c1f34b015",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/ventas/{{venta_registro_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"ventas",
+								"{{venta_registro_id}}"
+							]
+						},
+						"description": "Get a specific sale record by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Venta",
+					"id": "235bed45-685c-4eb8-8d6f-cfdeeec66570",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cantidad\": 25,\n  \"fechaVenta\": \"2026-02-03T15:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/ventas/{{venta_registro_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"ventas",
+								"{{venta_registro_id}}"
+							]
+						},
+						"description": "Update a sale record (partial update)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Venta",
+					"id": "c3eba658-86d7-4fe3-9792-2b6bababe9ae",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/ventas/{{venta_registro_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"ventas",
+								"{{venta_registro_id}}"
+							]
+						},
+						"description": "Delete a sale record"
+					},
+					"response": []
+				}
+			],
+			"id": "6eb0e88d-54d9-40ff-96cd-5e0c39fc5372"
+		},
+		{
+			"name": "Logistics",
+			"item": [
+				{
+					"name": "Tendero",
+					"item": [
+						{
+							"name": "Get Productos Disponibles",
+							"id": "bb67bbf4-9fe0-4327-9a30-6ff756395a02",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/%20%20%20/productos-disponibles?tiendaId={{tienda_id}}&zona=Zona Norte",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"%20%20%20",
+										"productos-disponibles"
+									],
+									"query": [
+										{
+											"key": "tiendaId",
+											"value": "{{tienda_id}}",
+											"description": "Filter by store ID"
+										},
+										{
+											"key": "zona",
+											"value": "Zona Norte",
+											"description": "Filter by catalog zone"
+										}
+									]
+								},
+								"description": "Get available products for a store and zone using the current tendero endpoint path."
+							},
+							"response": []
+						}
+					],
+					"id": "7e6de2b8-dd13-4f7c-8c3e-0cebb75f9c3c"
+				},
+				{
+					"name": "Catalogos",
+					"item": [
+						{
+							"name": "Create Catalogo",
+							"id": "3a52659c-1b1b-40b8-8e97-099683f39fd6",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"vigenciaDesde\": \"2026-01-01T00:00:00.000Z\",\n  \"vigenciaHasta\": \"2026-12-31T23:59:59.999Z\",\n  \"zona\": \"Zona Norte\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos"
+									]
+								},
+								"description": "Create a new catalogo"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Catalogos",
+							"id": "48cebe9b-ce3b-4237-8d10-56b4c8bf3b36",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos"
+									]
+								},
+								"description": "Get all catalogos"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Catalogo by ID",
+							"id": "7ff1e490-506e-4c98-b090-7db74701f149",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos",
+										"{{catalogo_id}}"
+									]
+								},
+								"description": "Get a specific catalogo by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Catalogo",
+							"id": "f69e7a29-748a-47a7-bbee-5ae8e0e53339",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"vigenciaHasta\": \"2026-12-31T23:59:59.999Z\",\n  \"zona\": \"Zona Sur\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos",
+										"{{catalogo_id}}"
+									]
+								},
+								"description": "Update a catalogo"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Catalogo",
+							"id": "c980fd3e-92c7-4d42-98de-c2b75b401af0",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos",
+										"{{catalogo_id}}"
+									]
+								},
+								"description": "Delete a catalogo"
+							},
+							"response": []
+						}
+					],
+					"id": "94681e0b-0e8d-4bba-bf86-238279a6de8d"
+				},
+				{
+					"name": "Catalogo Productos",
+					"item": [
+						{
+							"name": "Add Producto to Catalogo",
+							"id": "e11f49b6-8632-4ae8-9583-41920464e344",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productoId\": \"{{producto_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}/productos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos",
+										"{{catalogo_id}}",
+										"productos"
+									]
+								},
+								"description": "Add a producto to catalogo"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Productos by Catalogo",
+							"id": "a72564e0-e5de-48aa-8d1c-7d331f18bf6f",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}/productos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos",
+										"{{catalogo_id}}",
+										"productos"
+									]
+								},
+								"description": "Get productos in catalogo"
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Producto from Catalogo",
+							"id": "a69b521f-c104-4085-b7b5-4e765c1d8a39",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/catalogos/{{catalogo_id}}/productos/{{producto_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"catalogos",
+										"{{catalogo_id}}",
+										"productos",
+										"{{producto_id}}"
+									]
+								},
+								"description": "Remove producto from catalogo"
+							},
+							"response": []
+						}
+					],
+					"id": "3bf1ae05-088a-49ac-bf39-3c77be0d7c4e"
+				},
+				{
+					"name": "Despachos",
+					"item": [
+						{
+							"name": "Create Despacho",
+							"id": "1654de3f-2731-4fbc-9cbc-6e41063fe7c8",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"pedidoId\": \"{{pedido_id}}\",\n  \"bodega\": \"Bodega Central\",\n  \"horaSalida\": \"2026-02-11T08:00:00.000Z\",\n  \"ventanaPrometidaInicio\": \"2026-02-11T10:00:00.000Z\",\n  \"ventanaPrometidaFin\": \"2026-02-11T14:00:00.000Z\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/despachos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"despachos"
+									]
+								},
+								"description": "Create a new despacho"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Despachos",
+							"id": "a2a000fe-a291-4d3c-8362-af98798f0639",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/despachos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"despachos"
+									]
+								},
+								"description": "Get all despachos"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Despacho by ID",
+							"id": "f90d43a9-829d-428a-a0ce-8f82f6cbfedc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/despachos/{{despacho_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"despachos",
+										"{{despacho_id}}"
+									]
+								},
+								"description": "Get a specific despacho by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Despacho",
+							"id": "eb86fe14-9193-496a-9a02-a7a3397a8ac4",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ventanaPrometidaInicio\": \"2026-02-11T11:00:00.000Z\",\n  \"ventanaPrometidaFin\": \"2026-02-11T15:00:00.000Z\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/despachos/{{despacho_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"despachos",
+										"{{despacho_id}}"
+									]
+								},
+								"description": "Update a despacho"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Despacho",
+							"id": "ae30e170-9a8c-4cb7-ae2e-73cbe43cc0be",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/despachos/{{despacho_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"despachos",
+										"{{despacho_id}}"
+									]
+								},
+								"description": "Delete a despacho"
+							},
+							"response": []
+						}
+					],
+					"id": "d7a635d0-1920-4eee-a89e-932f15056b77"
+				},
+				{
+					"name": "Disponibilidad Zona",
+					"item": [
+						{
+							"name": "Create Disponibilidad Zona",
+							"id": "04e3c319-e75d-4b13-9772-17046f4ab248",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"catalogoId\": \"{{catalogo_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"cantidadDisponible\": 100\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/disponibilidad-zona",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"disponibilidad-zona"
+									]
+								},
+								"description": "Create a new disponibilidad zona"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Disponibilidad Zona",
+							"id": "52da6bf7-c573-4857-b427-5d2353a75435",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/disponibilidad-zona",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"disponibilidad-zona"
+									]
+								},
+								"description": "Get all disponibilidad zona"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Disponibilidad Zona by ID",
+							"id": "3968c63e-1247-4ef7-aae0-9f092151a5cf",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/disponibilidad-zona/{{disponibilidad_zona_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"disponibilidad-zona",
+										"{{disponibilidad_zona_id}}"
+									]
+								},
+								"description": "Get a specific disponibilidad zona by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Disponibilidad Zona",
+							"id": "8e4a48bc-a2a8-4bc1-868b-619a8499a92c",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cantidadDisponible\": 150\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/disponibilidad-zona/{{disponibilidad_zona_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"disponibilidad-zona",
+										"{{disponibilidad_zona_id}}"
+									]
+								},
+								"description": "Update a disponibilidad zona"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Disponibilidad Zona",
+							"id": "f99cd7c1-f895-4e40-b002-aeb48efbde47",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/disponibilidad-zona/{{disponibilidad_zona_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"disponibilidad-zona",
+										"{{disponibilidad_zona_id}}"
+									]
+								},
+								"description": "Delete a disponibilidad zona"
+							},
+							"response": []
+						}
+					],
+					"id": "16245fd6-0d7a-4e7d-afd0-9d323a4cd392"
+				},
+				{
+					"name": "Notas Credito",
+					"item": [
+						{
+							"name": "Create Nota Credito",
+							"id": "09a2360d-38a7-42b4-8687-3bee36fbb305",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"pedidoId\": \"{{pedido_id}}\",\n  \"numeroDocumento\": \"NC-2026-001\",\n  \"fecha\": \"2026-02-11T10:00:00.000Z\",\n  \"motivo\": \"productoVencido\",\n  \"monto\": 50.00,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"evidencia\": \"Foto del producto dañado\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/notas-credito",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"notas-credito"
+									]
+								},
+								"description": "Create a new nota credito"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Notas Credito",
+							"id": "e6cd7a34-c128-4309-8875-32cb6411895a",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/notas-credito",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"notas-credito"
+									]
+								},
+								"description": "Get all notas credito"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Nota Credito by ID",
+							"id": "04b141dd-3e19-4ad1-a525-b49b07a4398f",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/notas-credito/{{nota_credito_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"notas-credito",
+										"{{nota_credito_id}}"
+									]
+								},
+								"description": "Get a specific nota credito by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Nota Credito",
+							"id": "1eda7be2-84b2-47d2-8e36-7beee9051b7d",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"monto\": 75.00,\n  \"evidencia\": \"Evidencia actualizada\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/notas-credito/{{nota_credito_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"notas-credito",
+										"{{nota_credito_id}}"
+									]
+								},
+								"description": "Update a nota credito"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Nota Credito",
+							"id": "564cad57-ab9f-4f3f-bc08-0c2dc58f5a7b",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/notas-credito/{{nota_credito_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"notas-credito",
+										"{{nota_credito_id}}"
+									]
+								},
+								"description": "Delete a nota credito"
+							},
+							"response": []
+						}
+					],
+					"id": "39645f64-684c-4ef7-916c-9cf93a440b13"
+				},
+				{
+					"name": "Pedidos",
+					"item": [
+						{
+							"name": "Create Pedido",
+							"id": "7a1fd58d-609c-43ab-8d7e-b602d184ef43",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"identificador\": \"PED-2026-001\",\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"fechaHoraCreacion\": \"2026-02-11T10:00:00.000Z\",\n  \"montoTotal\": 150.00,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"items\": [\n    {\n      \"productoId\": \"{{producto_id}}\",\n      \"cantidad\": 10,\n      \"precioUnitario\": 15.00,\n      \"descuento\": 0,\n      \"monedaId\": \"{{moneda_id}}\"\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/pedidos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"pedidos"
+									]
+								},
+								"description": "Create a new pedido"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Pedidos",
+							"id": "bd857c8f-cac7-444b-81fa-eb446c4cc518",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/pedidos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"pedidos"
+									]
+								},
+								"description": "Get all pedidos"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pedido by ID",
+							"id": "6dda1c24-f18d-4875-8ea7-ee44dbcca9aa",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/pedidos/{{pedido_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"pedidos",
+										"{{pedido_id}}"
+									]
+								},
+								"description": "Get a specific pedido by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Pedido",
+							"id": "f1773dec-6cf1-4d7d-a42d-e80604f09049",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"estado\": \"aprobado\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/pedidos/{{pedido_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"pedidos",
+										"{{pedido_id}}"
+									]
+								},
+								"description": "Update a pedido"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pedido",
+							"id": "3f39cfa2-07fd-4b0a-ae08-d610fbbdfc4f",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/pedidos/{{pedido_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"pedidos",
+										"{{pedido_id}}"
+									]
+								},
+								"description": "Delete a pedido"
+							},
+							"response": []
+						}
+					],
+					"id": "c708114c-d87b-4ebc-ac9e-fe2aeffedd67"
+				},
+				{
+					"name": "Productos",
+					"item": [
+						{
+							"name": "Create Producto",
+							"id": "afef454a-c7ef-4dfd-8d4a-24957bea624e",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoInterno\": \"PROD001\",\n  \"codigoBarras\": \"7501234567890\",\n  \"nombre\": \"Coca Cola 2L\",\n  \"marca\": \"Coca Cola\",\n  \"categoria\": \"Bebidas\",\n  \"presentacion\": \"2L\",\n  \"precioBase\": 25.50,\n  \"monedaId\": \"{{moneda_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/productos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"productos"
+									]
+								},
+								"description": "Create a new producto"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Productos",
+							"id": "d2f68a76-bbbb-4e78-99a2-557bac926134",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/productos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"productos"
+									]
+								},
+								"description": "Get all productos"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Producto by ID",
+							"id": "8a600b26-5990-47d5-b6b7-207e7ea33ceb",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/productos/{{producto_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"productos",
+										"{{producto_id}}"
+									]
+								},
+								"description": "Get a specific producto by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Producto",
+							"id": "a508e80b-54a0-47d8-8936-bc8d537b2b6f",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"precioBase\": 28.00,\n  \"presentacion\": \"2.5L\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/productos/{{producto_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"productos",
+										"{{producto_id}}"
+									]
+								},
+								"description": "Update a producto"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Producto",
+							"id": "6ebca05f-43d0-49cc-a8ea-8870c071bf69",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/productos/{{producto_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"productos",
+										"{{producto_id}}"
+									]
+								},
+								"description": "Delete a producto"
+							},
+							"response": []
+						}
+					],
+					"id": "8bd201b3-8a30-4da4-b3f8-5bd42c205011"
+				},
+				{
+					"name": "Promociones",
+					"item": [
+						{
+							"name": "Create Promocion",
+							"id": "8228c98b-c785-414e-b236-60dcdec8c898",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Descuento especial\",\n  \"precioPromocional\": 20.00,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"productoId\": \"{{producto_id}}\",\n  \"tiendaIds\": [\"{{tienda_id}}\"],\n  \"inicio\": \"2026-02-01T00:00:00.000Z\",\n  \"fin\": \"2026-02-28T23:59:59.999Z\",\n  \"restricciones\": 0\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/promociones",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"promociones"
+									]
+								},
+								"description": "Create a new promocion"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Promociones",
+							"id": "bec3cac9-e96f-42ad-8e15-7b9834e004b5",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/promociones",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"promociones"
+									]
+								},
+								"description": "Get all promociones"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Promocion by ID",
+							"id": "42c15b7b-cb83-46d5-a0be-3b89b25de1ac",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/promociones/{{promocion_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"promociones",
+										"{{promocion_id}}"
+									]
+								},
+								"description": "Get a specific promocion by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Promocion",
+							"id": "33c8a5b5-45c8-4d36-9f0d-ff454d5a14bc",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"precioPromocional\": 18.00,\n  \"fin\": \"2026-03-15T23:59:59.999Z\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/logistics/promociones/{{promocion_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"promociones",
+										"{{promocion_id}}"
+									]
+								},
+								"description": "Update a promocion"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Promocion",
+							"id": "433df704-7925-4fc1-933d-386543b576af",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistics/promociones/{{promocion_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistics",
+										"promociones",
+										"{{promocion_id}}"
+									]
+								},
+								"description": "Delete a promocion"
+							},
+							"response": []
+						}
+					],
+					"id": "bbf62ca3-9184-414d-9ecd-046bcd59c55b"
+				}
+			],
+			"id": "53da10bb-1f18-43bb-b7dc-8d26d3c862de"
+		},
+		{
+			"name": "Sales (Ventas)",
+			"item": [
+				{
+					"name": "Productos Externos",
+					"item": [
+						{
+							"name": "Create Producto Externo",
+							"id": "5366cf4f-4eee-4e5b-9575-3fac245c4ffe",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"codigoBarras\": \"7501234567890\",\n  \"nombre\": \"Coca Cola 2L\",\n  \"categoria\": \"Bebidas\",\n  \"precioBase\": 25.50,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"cantidad\": 100.0\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ventas/productos-externos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"productos-externos"
+									]
+								},
+								"description": "Create a new external product"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Productos Externos",
+							"id": "74f75d0a-e8ce-492a-8ede-4e7f82974e3b",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/productos-externos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"productos-externos"
+									]
+								},
+								"description": "Get all external products (supports query parameters)"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Productos Externos with Filters",
+							"id": "be2e7043-1ee3-4775-874d-80dccbecfcbb",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/productos-externos?tiendaId={{tienda_id}}&categoria=Bebidas&nombre=Coca",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"productos-externos"
+									],
+									"query": [
+										{
+											"key": "tiendaId",
+											"value": "{{tienda_id}}",
+											"description": "Filter by store ID"
+										},
+										{
+											"key": "categoria",
+											"value": "Bebidas",
+											"description": "Filter by category"
+										},
+										{
+											"key": "nombre",
+											"value": "Coca",
+											"description": "Filter by name (partial match)"
+										},
+										{
+											"key": "codigoBarras",
+											"value": "7501234567890",
+											"description": "Filter by barcode",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Get external products with query filters"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Producto Externo by ID",
+							"id": "b04db5a7-2b48-4792-9d30-4d1ca8c9ab59",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/productos-externos/{{producto_externo_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"productos-externos",
+										"{{producto_externo_id}}"
+									]
+								},
+								"description": "Get a specific external product by ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Producto Externo",
+							"id": "8d0b490e-d51e-44a2-b05a-6901bff3b85c",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"precioBase\": 30.00,\n  \"cantidad\": 150.0\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ventas/productos-externos/{{producto_externo_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"productos-externos",
+										"{{producto_externo_id}}"
+									]
+								},
+								"description": "Update an external product (partial update)"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Producto Externo",
+							"id": "8cd3029b-e9da-4650-b257-be60e277a101",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/productos-externos/{{producto_externo_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"productos-externos",
+										"{{producto_externo_id}}"
+									]
+								},
+								"description": "Delete an external product"
+							},
+							"response": []
+						}
+					],
+					"id": "9c3bdd6b-feca-4f36-8b5c-1f6f9ce768ee"
+				},
+				{
+					"name": "Ventas",
+					"item": [
+						{
+							"name": "Create Venta",
+							"id": "9ac1fefc-bff0-404b-b2a7-58698144b840",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tiendaId\": \"{{tienda_id}}\",\n  \"fechaHora\": \"2026-02-09T10:30:00.000Z\",\n  \"monedaId\": \"{{moneda_id}}\",\n  \"items\": [\n    {\n      \"productoExternoId\": \"{{producto_externo_id}}\",\n      \"cantidad\": 2,\n      \"precioUnitario\": 26.00\n    },\n    {\n      \"productoExternoId\": \"{{producto_externo_id}}\",\n      \"cantidad\": 3,\n      \"precioUnitario\": 26.00\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas"
+									]
+								},
+								"description": "Create a new sale with items. Total is automatically calculated."
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Ventas",
+							"id": "78ae9f3b-228f-4edf-be06-36fd89d84a05",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas"
+									]
+								},
+								"description": "Get all sales (supports query parameters)"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Ventas with Filters",
+							"id": "f415d62f-6f12-44bb-85e3-43d48fac5223",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas?tiendaId={{tienda_id}}&fechaDesde=2026-01-01T00:00:00.000Z&fechaHasta=2026-12-31T23:59:59.999Z",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas"
+									],
+									"query": [
+										{
+											"key": "tiendaId",
+											"value": "{{tienda_id}}",
+											"description": "Filter by store ID"
+										},
+										{
+											"key": "fechaDesde",
+											"value": "2026-01-01T00:00:00.000Z",
+											"description": "Filter by start date (inclusive)"
+										},
+										{
+											"key": "fechaHasta",
+											"value": "2026-12-31T23:59:59.999Z",
+											"description": "Filter by end date (inclusive)"
+										},
+										{
+											"key": "productoExternoId",
+											"value": "{{producto_externo_id}}",
+											"description": "Filter by external product ID",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Get sales with query filters"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Venta by ID",
+							"id": "c58d1805-2d38-48ec-a32e-b89fd8023fa5",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas",
+										"{{venta_ventas_id}}"
+									]
+								},
+								"description": "Get a specific sale by ID with all items"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Venta - Items",
+							"id": "1a0b4bc3-25ef-4efc-be5c-dfbbd107a030",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"items\": [\n    {\n      \"productoExternoId\": \"{{producto_externo_id}}\",\n      \"cantidad\": 5,\n      \"precioUnitario\": 20.00\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas",
+										"{{venta_ventas_id}}"
+									]
+								},
+								"description": "Update sale items (replaces all items, recalculates total)"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Venta - Fecha",
+							"id": "40e8ccd5-3373-4d85-9aab-566317410417",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fechaHora\": \"2026-02-10T15:00:00.000Z\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas",
+										"{{venta_ventas_id}}"
+									]
+								},
+								"description": "Update sale date/time only (total unchanged)"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Venta",
+							"id": "7100095f-71f1-4076-94c6-ab8bd50f0f3e",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/ventas/ventas/{{venta_ventas_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"ventas",
+										"ventas",
+										"{{venta_ventas_id}}"
+									]
+								},
+								"description": "Delete a sale (cascade deletes all items)"
+							},
+							"response": []
+						}
+					],
+					"id": "7b138c8c-88ea-4b37-9c20-f2ac380c331e"
+				}
+			],
+			"id": "fff1a07f-e9e2-4def-849b-8df7b0325486"
+		},
+		{
+			"name": "Entregable 2.2 - TiendaService real",
+			"id": "6248dfc1-6972-44af-8e24-0e533c3c90f7",
+			"description": "Peticiones que demuestran el reemplazo de TiendaClientMock por TiendaService.",
+			"item": [
+				{
+					"name": "201 - Catalogo con tienda sembrada",
+					"id": "ce47fefa-d977-4118-a511-d03c17a27ea7",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/logistics/catalogos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logistics",
+								"catalogos"
+							]
+						},
+						"description": "Usa la tienda que siembra DatabaseSeederService. La verificación la hace TiendaService contra la base de datos.",
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tiendaId\": \"d494f8db-2f3a-4357-a219-26b24659fdc4\",\n  \"vigenciaDesde\": \"2026-01-01T00:00:00.000Z\",\n  \"vigenciaHasta\": \"2026-12-31T00:00:00.000Z\",\n  \"zona\": \"Zona Norte\"\n}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 - Catalogo con la tienda del mock antiguo",
+					"id": "b79f538f-c14f-4f40-8bc5-6e2ce30c6cac",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/logistics/catalogos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logistics",
+								"catalogos"
+							]
+						},
+						"description": "Este UUID era válido cuando existía TiendaClientMock. Que ahora falle es la prueba del reemplazo.",
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tiendaId\": \"9a2f2e7b-40c4-4c5f-a37c-baf722e18ab9\",\n  \"vigenciaDesde\": \"2026-01-01T00:00:00.000Z\",\n  \"vigenciaHasta\": \"2026-12-31T00:00:00.000Z\",\n  \"zona\": \"Zona Norte\"\n}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 - Pedido con la tienda del mock antiguo",
+					"id": "a90568e9-4eca-494f-ad4b-323a4e3d70a2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/logistics/pedidos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logistics",
+								"pedidos"
+							]
+						},
+						"description": "PedidoService también migró del mock al servicio real.",
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"identificador\": \"PED-900\",\n  \"tiendaId\": \"9a2f2e7b-40c4-4c5f-a37c-baf722e18ab9\",\n  \"fechaHoraCreacion\": \"2026-02-03T10:00:00.000Z\",\n  \"montoTotal\": 10,\n  \"monedaId\": \"{{moneda_id}}\",\n  \"estado\": \"creado\",\n  \"items\": [\n    {\n      \"productoId\": \"{{producto_id}}\",\n      \"cantidad\": 1,\n      \"precioUnitario\": 10,\n      \"descuento\": 0,\n      \"monedaId\": \"{{moneda_id}}\"\n    }\n  ]\n}"
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "bbb8cb07-b1ac-452a-ae4e-a6225b7add32",
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"id": "b38bd13b-2780-4023-9f49-dd8083ba6d9b",
+			"key": "producto_id",
+			"value": "879e65ee-625f-4744-bbae-d85e02761898",
+			"type": "string"
+		},
+		{
+			"id": "8bc115a5-6ec1-4bd6-8967-625cf03b547f",
+			"key": "tienda_id",
+			"value": "d494f8db-2f3a-4357-a219-26b24659fdc4",
+			"type": "string"
+		},
+		{
+			"id": "36f95af5-16ea-45a3-9ea7-6eb315567821",
+			"key": "moneda_id",
+			"value": "550e8400-e29b-41d4-a716-446655440000",
+			"type": "string"
+		},
+		{
+			"id": "48eff588-451d-4012-b375-2296ef3370b3",
+			"key": "item_id",
+			"value": "cccb8cac-bc7f-49e6-8658-93b917282f60",
+			"type": "string"
+		},
+		{
+			"id": "84f74b9c-4d15-4688-9fac-0d77f11dfdda",
+			"key": "compra_id",
+			"value": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+			"type": "string"
+		},
+		{
+			"id": "92bb32f1-a839-45ee-b4b5-ada50a7bfbe7",
+			"key": "venta_id",
+			"value": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+			"type": "string"
+		},
+		{
+			"id": "f64f911c-b7f1-4ca8-b391-308e068c4a67",
+			"key": "compra_registro_id",
+			"value": "31a2ad91-46f5-4843-b0be-df6676eee479",
+			"type": "string"
+		},
+		{
+			"id": "8d36c125-16c5-48b4-ab03-e4a0982c11ed",
+			"key": "venta_registro_id",
+			"value": "b8557555-f0f4-4dfe-9903-aa94e1603317",
+			"type": "string"
+		},
+		{
+			"id": "067df565-d48d-4048-b6e6-97d65bf297f6",
+			"key": "catalogo_id",
+			"value": "3b594d7b-0cf8-4bfa-878e-4160650bf308",
+			"type": "string"
+		},
+		{
+			"id": "fd65e8ca-1668-4cab-845e-cba5724c6214",
+			"key": "despacho_id",
+			"value": "3dd154ea-2220-4333-8d1d-fe1e7d70882e",
+			"type": "string"
+		},
+		{
+			"id": "3a491b3c-c9ad-4f2e-8df9-020006baab66",
+			"key": "pedido_id",
+			"value": "1b22bfb1-6596-4bc7-8601-db4641aff6f1",
+			"type": "string"
+		},
+		{
+			"id": "cfbe896a-094a-498c-a916-680b84d12535",
+			"key": "promocion_id",
+			"value": "ed0d8373-334f-42d6-8bb4-1be9df96535c",
+			"type": "string"
+		},
+		{
+			"id": "29971d56-69ab-4916-9874-1978e27d1d73",
+			"key": "nota_credito_id",
+			"value": "4ccbf6ca-6b75-40dc-a9e7-b0398eaed093",
+			"type": "string"
+		},
+		{
+			"id": "7a5760f1-dc80-4271-8344-22890a244dd1",
+			"key": "disponibilidad_zona_id",
+			"value": "d0eb7377-1086-416b-9cc6-fd6a2c912d71",
+			"type": "string"
+		},
+		{
+			"id": "e18e269d-281c-4f1b-ad30-0f2563b4d6a2",
+			"key": "producto_externo_id",
+			"value": "pex11111-1111-1111-1111-111111111111",
+			"type": "string"
+		},
+		{
+			"id": "a0fad954-1b6b-4dd5-b229-64e4aeb40695",
+			"key": "venta_ventas_id",
+			"value": "ven11111-1111-1111-1111-111111111111",
+			"type": "string"
+		},
+		{
+			"id": "4b798666-73d7-45e0-97d4-fa3d86b00847",
+			"key": "usuario_id",
+			"value": "ac716c39-4d10-4fe8-b2b7-6b4a2e25234e",
+			"type": "string"
+		},
+		{
+			"id": "db92c8cf-1733-485c-9d31-eb26195a26ae",
+			"key": "pais_id",
+			"value": "cdeeb886-a1db-4ee2-b694-0c3747b157af",
+			"type": "string"
+		},
+		{
+			"id": "ea15d719-178e-458d-8749-d6c98a249b53",
+			"key": "documento_tienda_id",
+			"value": "26b3c378-e42a-45b9-aa2a-c9a0bd18bc94",
+			"type": "string"
+		}
+	]
 }

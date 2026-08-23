@@ -19,6 +19,9 @@ export class CreateTiendaDto {
   @IsUUID()
   responsableId: string;
 
+  @IsUUID()
+  paisId: string;
+
   @IsString()
   @MaxLength(100)
   rut: string;

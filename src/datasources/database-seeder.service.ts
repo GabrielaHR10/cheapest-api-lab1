@@ -39,8 +39,14 @@ export class DatabaseSeederService implements OnModuleInit {
 
       const id = (key: string) => this.generateSeededUuid(key);
       const seededIds = {
+        usuario1: id('usuarios:1'),
+        usuario2: id('usuarios:2'),
+        pais1: id('paises:1'),
+        pais2: id('paises:2'),
         tienda1: id('tiendas:1'),
         tienda2: id('tiendas:2'),
+        documentoTienda1: id('documentos-tienda:1'),
+        documentoTienda2: id('documentos-tienda:2'),
         itemInventario1: id('items-inventario:1'),
         itemInventario2: id('items-inventario:2'),
         itemInventario3: id('items-inventario:3'),
@@ -81,6 +87,44 @@ export class DatabaseSeederService implements OnModuleInit {
         disponibilidadZona4: id('disponibilidad-zona:4'),
         notaCredito1: id('notas-credito:1'),
       };
+
+      // ============================================
+      // Seed Usuarios (modulo de Identificacion)
+      // ============================================
+      await this.dataSource.query(`
+        INSERT INTO usuarios (id, nombre, telefono, perfil, "createdAt", "updatedAt") VALUES
+        ('${seededIds.usuario1}', 'Ana Torres', '3001234567', 'tendero', NOW(), NOW()),
+        ('${seededIds.usuario2}', 'Carlos Rojas', '3007654321', 'supervisor', NOW(), NOW())
+      `);
+
+      // ============================================
+      // Seed Paises (modulo de Identificacion)
+      // ============================================
+      await this.dataSource.query(`
+        INSERT INTO paises (id, nombre, moneda, "createdAt", "updatedAt") VALUES
+        ('${seededIds.pais1}', 'Colombia', 'COP', NOW(), NOW()),
+        ('${seededIds.pais2}', 'Mexico', 'MXN', NOW(), NOW())
+      `);
+
+      // ============================================
+      // Seed Tiendas (modulo de Identificacion)
+      // Se siembran antes que el resto porque catalogos, pedidos, items de
+      // inventario y promociones referencian estos ids de tienda.
+      // ============================================
+      await this.dataSource.query(`
+        INSERT INTO tiendas (id, "codigoInterno", "nombreComercial", "responsableId", "paisId", rut, direccion, telefono, "estadoCaptacion", "createdAt", "updatedAt") VALUES
+        ('${seededIds.tienda1}', 'TC001', 'Tienda Central', '${seededIds.usuario1}', '${seededIds.pais1}', '900123456-1', 'Cra 7 #45-12, Bogota', '3001112233', 'habilitadoAvanzado', NOW(), NOW()),
+        ('${seededIds.tienda2}', 'TN002', 'Tienda Norte', '${seededIds.usuario2}', '${seededIds.pais2}', '900654321-2', 'Calle 100 #15-30, Bogota', '3004445566', 'habilitadoBasico', NOW(), NOW())
+      `);
+
+      // ============================================
+      // Seed Documentos de Tienda (modulo de Identificacion)
+      // ============================================
+      await this.dataSource.query(`
+        INSERT INTO documentos_tienda (id, "tiendaId", tipo, numero, direccion, "fechaRecepcion", validado, "createdAt", "updatedAt") VALUES
+        ('${seededIds.documentoTienda1}', '${seededIds.tienda1}', 'RUT', '900123456-1', 'Cra 7 #45-12, Bogota', '2026-01-10 09:00:00', true, NOW(), NOW()),
+        ('${seededIds.documentoTienda2}', '${seededIds.tienda2}', 'CamaraComercio', 'CC-2026-0042', 'Calle 100 #15-30, Bogota', '2026-01-12 14:30:00', false, NOW(), NOW())
+      `);
 
       // ============================================
       // Seed Items de Inventario

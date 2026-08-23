@@ -1,7 +1,11 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateTiendaDto, QueryTiendaDto, UpdateTiendaDto } from '../dtos';
-import { TiendaRepository, UsuarioRepository } from '../repositories';
+import {
+  PaisRepository,
+  TiendaRepository,
+  UsuarioRepository,
+} from '../repositories';
 import { EstadoCaptacion } from '../repositories/entities';
 import { TiendaService } from './tienda.service';
 
@@ -9,11 +13,13 @@ describe('TiendaService', () => {
   let service: TiendaService;
   let repository: jest.Mocked<TiendaRepository>;
   let usuarioRepository: jest.Mocked<UsuarioRepository>;
+  let paisRepository: jest.Mocked<PaisRepository>;
 
   const dto: CreateTiendaDto = {
     codigoInterno: 'TC001',
     nombreComercial: 'Tienda Central',
     responsableId: 'usuario-1',
+    paisId: 'pais-1',
     rut: '900123456-1',
     direccion: 'Cra 1 #2-3',
     telefono: '3001234567',
@@ -39,6 +45,9 @@ describe('TiendaService', () => {
     const mockUsuarioRepository = {
       findById: jest.fn(),
     };
+    const mockPaisRepository = {
+      findById: jest.fn(),
+    };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -51,12 +60,17 @@ describe('TiendaService', () => {
           provide: UsuarioRepository,
           useValue: mockUsuarioRepository,
         },
+        {
+          provide: PaisRepository,
+          useValue: mockPaisRepository,
+        },
       ],
     }).compile();
 
     service = module.get<TiendaService>(TiendaService);
     repository = module.get(TiendaRepository);
     usuarioRepository = module.get(UsuarioRepository);
+    paisRepository = module.get(PaisRepository);
   });
 
   it('should be defined', () => {
@@ -67,6 +81,7 @@ describe('TiendaService', () => {
     it('should create tienda when codigoInterno is free and responsable exists', async () => {
       repository.findByCodigoInterno.mockResolvedValue(null);
       usuarioRepository.findById.mockResolvedValue({ id: 'usuario-1' } as any);
+      paisRepository.findById.mockResolvedValue({ id: 'pais-1' } as any);
       repository.create.mockResolvedValue(entity as any);
 
       const result = await service.create(dto);
@@ -87,6 +102,15 @@ describe('TiendaService', () => {
     it('should throw BadRequestException when responsable does not exist', async () => {
       repository.findByCodigoInterno.mockResolvedValue(null);
       usuarioRepository.findById.mockResolvedValue(null);
+
+      await expect(service.create(dto)).rejects.toThrow(BadRequestException);
+      expect(repository.create).not.toHaveBeenCalled();
+    });
+
+    it('should throw BadRequestException when pais does not exist', async () => {
+      repository.findByCodigoInterno.mockResolvedValue(null);
+      usuarioRepository.findById.mockResolvedValue({ id: 'usuario-1' } as any);
+      paisRepository.findById.mockResolvedValue(null);
 
       await expect(service.create(dto)).rejects.toThrow(BadRequestException);
       expect(repository.create).not.toHaveBeenCalled();
